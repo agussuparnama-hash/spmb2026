@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Brawler - Fixed Version</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #060713;
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        #ui-container {
+            width: 800px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .health-bar-bg {
+            width: 350px;
+            height: 25px;
+            background: #222;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        #p1-health { width: 100%; height: 100%; background: #00f0ff; }
+        #p2-health { width: 100%; height: 100%; background: #ff007f; float: right; }
+        #status {
+            font-size: 1.5rem;
+            color: #ffff00;
+            text-shadow: 0 0 10px #ffff00;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        canvas {
+            border: 4px solid #333;
+            background: linear-gradient(to bottom, #111424, #0b0d1b);
+            box-shadow: 0 0 30px rgba(0,0,0,0.7);
+        }
+        .controls-info {
+            margin-top: 15px;
+            color: #616685;
+            text-align: center;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="status">SIAP BERTARUNG! (Tekan tombol di stik untuk aktifkan)</div>
+
+    <div id="ui-container">
+        <div>
+            <div>PLAYER 1 (CYAN)</div>
+            <div class="health-bar-bg"><div id="p1-health"></div></div>
+        </div>
+        <div>
+            <div style="text-align: right;">KOMPUTER AI (PINK)</div>
+            <div class="health-bar-bg"><div id="p2-health"></div></div>
+        </div>
+    </div>
+    
+    <canvas id="fightArena" width="800" height="400"></canvas>
+
+    <div class="controls-info">
+        <strong>KONTROL STIK:</strong> Analog Kiri = Gerak & Lompat | Tombol A / X / Silang = Memukul<br>
+        <strong>KONTROL KEYBOARD (Alternatif):</strong> A / D = Jalan | W = Lompat | J = Memukul
+    </div>
+
+    <script>
+        const canvas = document.getElementById('fightArena');
+        const ctx = canvas.getContext('2d');
+        const statusEl = document.getElementById('status');
+        const p1HealthEl = document.getElementById('p1-health');
+        const p2HealthEl = document.getElementById('p2-health');
+
+        let isGameOver = false;
+        const gravity = 0.6;
+
+        // Input State untuk Keyboard
+        const keys = { a: false, d: false, w: false, j: false };
+
+        // --- OBJECT PLAYER 1 ---
+        const p1 = {
+            x: 150, y: 270, width: 40, height: 80,
+            vx: 0, vy: 0, isJumping: false, color: '#00f0ff',
+            hp: 100, isAttacking: false, attackTimer: 0,
+            side: 'right'
+        };
+
+        // --- OBJECT KOMPUTER (AI) ---
+        const ai = {
+            x: 600, y: 270, width: 40, height: 80,
+            vx: 0, vy: 0, isJumping: false, color: '#ff007f',
+            hp: 100, isAttacking: false, attackTimer: 0,
+            speed: 2, attackCooldown: 0
+        };
+
+        // Event Listener Keyboard
+        window.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() === 'a') keys.a = true;
+            if (e.key.toLowerCase() === 'd') keys.d = true;
+            if (e.key.toLowerCase() === 'w') keys.w = true;
+            if (e.key.toLowerCase() === 'j') keys.j = true;
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (e.key.toLowerCase() === 'a') keys.a = false;
+            if (e.key.toLowerCase() === 'd') keys.d = false;
+            if (e.key.toLowerCase() === 'w') keys.w = false;
+            if (e.key.toLowerCase() === 'j') keys.j = false;
+        });
+
+        // Deteksi Stik Terhubung (Hanya untuk ubah teks UI saja, tidak mengunci game)
+        window.addEventListener("gamepadconnected", (e) => {
+            statusEl.innerText = `STIK TERDETEKSI: ${e.gamepad.id.slice(0, 15)}... Tekan Tombol!`;
+        });
+
+        // Loop Utama Game
+        function gameLoop() {
+            // Bersihkan Layar & Gambar Tanah Arena
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#333';
+            ctx.fillRect(0, 350, canvas.width, 50);
+
+            if (!isGameOver) {
+                // Reset kecepatan X jalan Player 1 setiap frame
+                p1.vx = 0;
+
+                // ==========================================
+                // 1. MEMBACA INPUT KEYBOARD (UTAMA/CADANGAN)
+                // ==========================================
+                if (keys.a) { p1.vx = -4; p1.side = 'left'; }
+                if (keys.d) { p1.vx = 4; p1.side = 'right'; }
+                if (keys.w && !p1.isJumping) { p1.vy = -12; p1.isJumping = true; }
+                if (keys.j && !p1.isAttacking) { p1.isAttacking = true; p1.attackTimer = 10; }
+
+                // ==========================================
+                // 2. MEMBACA INPUT STIK / GAMEPAD (JIKA ADA)
+                // ==========================================
+                const gamepads = navigator.getGamepads();
+                // Cari stik aktif di slot mana saja (0-4)
+                for (let i = 0; i < gamepads.length; i++) {
+                    const gp = gamepads[i];
+                    if (gp) {
+                        statusEl.innerText = "FIGHT! (Stik Aktif)";
+                        
+                        // Gerak Kiri / Kanan (Analog Kiri)
+                        if (gp.axes[0] < -0.3) { p1.vx = -4; p1.side = 'left'; }
+                        if (gp.axes[0] > 0.3) { p1.vx = 4; p1.side = 'right'; }
+
+                        // Lompat (Analog Kiri ke Atas)
+                        if (gp.axes[1] < -0.6 && !p1.isJumping) { p1.vy = -12; p1.isJumping = true; }
+
+                        // Memukul (Tombol A / X paling bawah)
+                        if (gp.buttons[0].pressed && !p1.isAttacking) {
+                            p1.isAttacking = true;
+                            p1.attackTimer = 10;
+                        }
+                    }
+                }
+
+                // Aplikasi Fisika Gravitasi & Posisi Player 1
+                p1.vy += gravity;
+                p1.x += p1.vx;
+                p1.y += p1.vy;
+
+                if (p1.y + p1.height >= 350) {
+                    p1.y = 350 - p1.height;
+                    p1.vy = 0;
+                    p1.isJumping = false;
+                }
+                if (p1.x < 0) p1.x = 0;
+                if (p1.x > canvas.width - p1.width) p1.x = canvas.width - p1.width;
+
+                // ==========================================
+                // 3. LOGIKA KECERDASAN AI KOMPUTER
+                // ==========================================
+                if (ai.x < p1.x - 40) {
+                    ai.vx = ai.speed;
+                } else if (ai.x > p1.x + 40) {
+                    ai.vx = -ai.speed;
+                } else {
+                    ai.vx = 0;
+                    if (ai.attackCooldown <= 0 && !ai.isAttacking) {
+                        if (Math.random() < 0.07) {
+                            ai.isAttacking = true;
+                            ai.attackTimer = 10;
+                            ai.attackCooldown = 30;
+                        }
+                    }
+                }
+
+                if (ai.attackCooldown > 0) ai.attackCooldown--;
+
+                // Fisika AI Komputer
+                ai.vy += gravity;
+                ai.x += ai.vx;
+                ai.y += ai.vy;
+
+                if (ai.y + ai.height >= 350) {
+                    ai.y = 350 - ai.height;
+                    ai.vy = 0;
+                    ai.isJumping = false;
+                }
+
+                // ==========================================
+                // 4. HITBOX & DEMEG (COLLISION)
+                // ==========================================
+                // Serangan Player 1
+                if (p1.isAttacking) {
+                    p1.attackTimer--;
+                    let p1HitboxX = p1.side === 'right' ? p1.x + p1.width : p1.x - 30;
+                    
+                    // Gambar Efek Pukulan P1 (Warna Kuning)
+                    ctx.fillStyle = '#ffff00';
+                    ctx.fillRect(p1HitboxX, p1.y + 20, 30, 15);
+
+                    if (
+                        p1HitboxX < ai.x + ai.width && p1HitboxX + 30 > ai.x &&
+                        p1.y + 20 < ai.y + ai.height && p1.y + 35 > ai.y && p1.attackTimer === 9
+                    ) {
+                        ai.hp -= 10;
+                        if (ai.hp < 0) ai.hp = 0;
+                        p2HealthEl.style.width = ai.hp + '%';
+                    }
+                    if (p1.attackTimer <= 0) p1.isAttacking = false;
+                }
+
+                // Serangan AI Komputer
+                if (ai.isAttacking) {
+                    ai.attackTimer--;
+                    let aiHitboxX = ai.x < p1.x ? ai.x + ai.width : ai.x - 30;
+
+                    // Gambar Efek Pukulan AI (Warna Putih)
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(aiHitboxX, ai.y + 20, 30, 15);
+
+                    if (
+                        aiHitboxX < p1.x + p1.width && aiHitboxX + 30 > p1.x &&
+                        ai.y + 20 < p1.y + p1.height && ai.y + 35 > p1.y && ai.attackTimer === 9
+                    ) {
+                        p1.hp -= 8;
+                        if (p1.hp < 0) p1.hp = 0;
+                        p1HealthEl.style.width = p1.hp + '%';
+                    }
+                    if (ai.attackTimer <= 0) ai.isAttacking = false;
+                }
+
+                // Kondisi Menang / Kalah
+                if (p1.hp <= 0) { isGameOver = true; statusEl.innerText = "GAME OVER - AI MENANG! ❌"; }
+                if (ai.hp <= 0) { isGameOver = true; statusEl.innerText = "PLAYER 1 MENANG! 🎉"; }
+            }
+
+            // ==========================================
+            // 5. RENDERING (MENGGAMBAR KARAKTER)
+            // ==========================================
+            // P1 (Cyan) digambar di luar kondisi stik agar selalu terlihat
+            ctx.fillStyle = p1.color;
+            ctx.fillRect(p1.x, p1.y, p1.width, p1.height);
+
+            // Komputer AI (Pink)
+            ctx.fillStyle = ai.color;
+            ctx.fillRect(ai.x, ai.y, ai.width, ai.height);
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Jalankan game secara instan saat halaman dibuka
+        gameLoop();
+    </script>
+</body>
+</html>
