@@ -3,281 +3,316 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Brawler - Fixed Version</title>
+    <title>Game Tetris Sederhana</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background-color: #060713;
+            background-color: #202020;
             color: #fff;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            overflow: hidden;
+            height: 100vh;
+            margin: 0;
         }
-        #ui-container {
-            width: 800px;
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-        .health-bar-bg {
-            width: 350px;
-            height: 25px;
-            background: #222;
-            border: 2px solid #fff;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        #p1-health { width: 100%; height: 100%; background: #00f0ff; }
-        #p2-health { width: 100%; height: 100%; background: #ff007f; float: right; }
-        #status {
-            font-size: 1.5rem;
-            color: #ffff00;
-            text-shadow: 0 0 10px #ffff00;
-            text-align: center;
+
+        h1 {
             margin-bottom: 10px;
         }
-        canvas {
-            border: 4px solid #333;
-            background: linear-gradient(to bottom, #111424, #0b0d1b);
-            box-shadow: 0 0 30px rgba(0,0,0,0.7);
+
+        #score-board {
+            font-size: 24px;
+            margin-bottom: 20px;
         }
-        .controls-info {
-            margin-top: 15px;
-            color: #616685;
+
+        /* Ukuran canvas: 10 kolom x 20 baris (dikali 20px per kotak) */
+        canvas {
+            border: 4px solid #fff;
+            background-color: #111;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .instructions {
+            margin-top: 20px;
+            color: #aaa;
             text-align: center;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
 
-    <div id="status">SIAP BERTARUNG! (Tekan tombol di stik untuk aktifkan)</div>
-
-    <div id="ui-container">
-        <div>
-            <div>PLAYER 1 (CYAN)</div>
-            <div class="health-bar-bg"><div id="p1-health"></div></div>
-        </div>
-        <div>
-            <div style="text-align: right;">KOMPUTER AI (PINK)</div>
-            <div class="health-bar-bg"><div id="p2-health"></div></div>
-        </div>
-    </div>
+    <h1>TETRIS</h1>
+    <div id="score-board">Skor: <span id="score">0</span></div>
+    <canvas id="tetris" width="200" height="400"></canvas>
     
-    <canvas id="fightArena" width="800" height="400"></canvas>
-
-    <div class="controls-info">
-        <strong>KONTROL STIK:</strong> Analog Kiri = Gerak & Lompat | Tombol A / X / Silang = Memukul<br>
-        <strong>KONTROL KEYBOARD (Alternatif):</strong> A / D = Jalan | W = Lompat | J = Memukul
+    <div class="instructions">
+        <p>Kontrol: ⬅️ Kiri | ➡️ Kanan | ⬆️ Putar | ⬇️ Turun Cepat</p>
     </div>
 
     <script>
-        const canvas = document.getElementById('fightArena');
-        const ctx = canvas.getContext('2d');
-        const statusEl = document.getElementById('status');
-        const p1HealthEl = document.getElementById('p1-health');
-        const p2HealthEl = document.getElementById('p2-health');
+        const canvas = document.getElementById('tetris');
+        const context = canvas.getContext('2d');
 
-        let isGameOver = false;
-        const gravity = 0.6;
+        // Skala grid: 1 kotak = 20x20 piksel
+        context.scale(20, 20);
 
-        // Input State untuk Keyboard
-        const keys = { a: false, d: false, w: false, j: false };
-
-        // --- OBJECT PLAYER 1 ---
-        const p1 = {
-            x: 150, y: 270, width: 40, height: 80,
-            vx: 0, vy: 0, isJumping: false, color: '#00f0ff',
-            hp: 100, isAttacking: false, attackTimer: 0,
-            side: 'right'
-        };
-
-        // --- OBJECT KOMPUTER (AI) ---
-        const ai = {
-            x: 600, y: 270, width: 40, height: 80,
-            vx: 0, vy: 0, isJumping: false, color: '#ff007f',
-            hp: 100, isAttacking: false, attackTimer: 0,
-            speed: 2, attackCooldown: 0
-        };
-
-        // Event Listener Keyboard
-        window.addEventListener('keydown', (e) => {
-            if (e.key.toLowerCase() === 'a') keys.a = true;
-            if (e.key.toLowerCase() === 'd') keys.d = true;
-            if (e.key.toLowerCase() === 'w') keys.w = true;
-            if (e.key.toLowerCase() === 'j') keys.j = true;
-        });
-
-        window.addEventListener('keyup', (e) => {
-            if (e.key.toLowerCase() === 'a') keys.a = false;
-            if (e.key.toLowerCase() === 'd') keys.d = false;
-            if (e.key.toLowerCase() === 'w') keys.w = false;
-            if (e.key.toLowerCase() === 'j') keys.j = false;
-        });
-
-        // Deteksi Stik Terhubung (Hanya untuk ubah teks UI saja, tidak mengunci game)
-        window.addEventListener("gamepadconnected", (e) => {
-            statusEl.innerText = `STIK TERDETEKSI: ${e.gamepad.id.slice(0, 15)}... Tekan Tombol!`;
-        });
-
-        // Loop Utama Game
-        function gameLoop() {
-            // Bersihkan Layar & Gambar Tanah Arena
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#333';
-            ctx.fillRect(0, 350, canvas.width, 50);
-
-            if (!isGameOver) {
-                // Reset kecepatan X jalan Player 1 setiap frame
-                p1.vx = 0;
-
-                // ==========================================
-                // 1. MEMBACA INPUT KEYBOARD (UTAMA/CADANGAN)
-                // ==========================================
-                if (keys.a) { p1.vx = -4; p1.side = 'left'; }
-                if (keys.d) { p1.vx = 4; p1.side = 'right'; }
-                if (keys.w && !p1.isJumping) { p1.vy = -12; p1.isJumping = true; }
-                if (keys.j && !p1.isAttacking) { p1.isAttacking = true; p1.attackTimer = 10; }
-
-                // ==========================================
-                // 2. MEMBACA INPUT STIK / GAMEPAD (JIKA ADA)
-                // ==========================================
-                const gamepads = navigator.getGamepads();
-                // Cari stik aktif di slot mana saja (0-4)
-                for (let i = 0; i < gamepads.length; i++) {
-                    const gp = gamepads[i];
-                    if (gp) {
-                        statusEl.innerText = "FIGHT! (Stik Aktif)";
-                        
-                        // Gerak Kiri / Kanan (Analog Kiri)
-                        if (gp.axes[0] < -0.3) { p1.vx = -4; p1.side = 'left'; }
-                        if (gp.axes[0] > 0.3) { p1.vx = 4; p1.side = 'right'; }
-
-                        // Lompat (Analog Kiri ke Atas)
-                        if (gp.axes[1] < -0.6 && !p1.isJumping) { p1.vy = -12; p1.isJumping = true; }
-
-                        // Memukul (Tombol A / X paling bawah)
-                        if (gp.buttons[0].pressed && !p1.isAttacking) {
-                            p1.isAttacking = true;
-                            p1.attackTimer = 10;
-                        }
+        // Fungsi untuk menghapus baris yang penuh
+        function arenaSweep() {
+            let rowCount = 1;
+            outer: for (let y = arena.length - 1; y > 0; --y) {
+                for (let x = 0; x < arena[y].length; ++x) {
+                    if (arena[y][x] === 0) {
+                        continue outer;
                     }
                 }
+                const row = arena.splice(y, 1)[0].fill(0);
+                arena.unshift(row);
+                ++y;
 
-                // Aplikasi Fisika Gravitasi & Posisi Player 1
-                p1.vy += gravity;
-                p1.x += p1.vx;
-                p1.y += p1.vy;
-
-                if (p1.y + p1.height >= 350) {
-                    p1.y = 350 - p1.height;
-                    p1.vy = 0;
-                    p1.isJumping = false;
-                }
-                if (p1.x < 0) p1.x = 0;
-                if (p1.x > canvas.width - p1.width) p1.x = canvas.width - p1.width;
-
-                // ==========================================
-                // 3. LOGIKA KECERDASAN AI KOMPUTER
-                // ==========================================
-                if (ai.x < p1.x - 40) {
-                    ai.vx = ai.speed;
-                } else if (ai.x > p1.x + 40) {
-                    ai.vx = -ai.speed;
-                } else {
-                    ai.vx = 0;
-                    if (ai.attackCooldown <= 0 && !ai.isAttacking) {
-                        if (Math.random() < 0.07) {
-                            ai.isAttacking = true;
-                            ai.attackTimer = 10;
-                            ai.attackCooldown = 30;
-                        }
-                    }
-                }
-
-                if (ai.attackCooldown > 0) ai.attackCooldown--;
-
-                // Fisika AI Komputer
-                ai.vy += gravity;
-                ai.x += ai.vx;
-                ai.y += ai.vy;
-
-                if (ai.y + ai.height >= 350) {
-                    ai.y = 350 - ai.height;
-                    ai.vy = 0;
-                    ai.isJumping = false;
-                }
-
-                // ==========================================
-                // 4. HITBOX & DEMEG (COLLISION)
-                // ==========================================
-                // Serangan Player 1
-                if (p1.isAttacking) {
-                    p1.attackTimer--;
-                    let p1HitboxX = p1.side === 'right' ? p1.x + p1.width : p1.x - 30;
-                    
-                    // Gambar Efek Pukulan P1 (Warna Kuning)
-                    ctx.fillStyle = '#ffff00';
-                    ctx.fillRect(p1HitboxX, p1.y + 20, 30, 15);
-
-                    if (
-                        p1HitboxX < ai.x + ai.width && p1HitboxX + 30 > ai.x &&
-                        p1.y + 20 < ai.y + ai.height && p1.y + 35 > ai.y && p1.attackTimer === 9
-                    ) {
-                        ai.hp -= 10;
-                        if (ai.hp < 0) ai.hp = 0;
-                        p2HealthEl.style.width = ai.hp + '%';
-                    }
-                    if (p1.attackTimer <= 0) p1.isAttacking = false;
-                }
-
-                // Serangan AI Komputer
-                if (ai.isAttacking) {
-                    ai.attackTimer--;
-                    let aiHitboxX = ai.x < p1.x ? ai.x + ai.width : ai.x - 30;
-
-                    // Gambar Efek Pukulan AI (Warna Putih)
-                    ctx.fillStyle = '#ffffff';
-                    ctx.fillRect(aiHitboxX, ai.y + 20, 30, 15);
-
-                    if (
-                        aiHitboxX < p1.x + p1.width && aiHitboxX + 30 > p1.x &&
-                        ai.y + 20 < p1.y + p1.height && ai.y + 35 > p1.y && ai.attackTimer === 9
-                    ) {
-                        p1.hp -= 8;
-                        if (p1.hp < 0) p1.hp = 0;
-                        p1HealthEl.style.width = p1.hp + '%';
-                    }
-                    if (ai.attackTimer <= 0) ai.isAttacking = false;
-                }
-
-                // Kondisi Menang / Kalah
-                if (p1.hp <= 0) { isGameOver = true; statusEl.innerText = "GAME OVER - AI MENANG! ❌"; }
-                if (ai.hp <= 0) { isGameOver = true; statusEl.innerText = "PLAYER 1 MENANG! 🎉"; }
+                player.score += rowCount * 10;
+                rowCount *= 2;
             }
-
-            // ==========================================
-            // 5. RENDERING (MENGGAMBAR KARAKTER)
-            // ==========================================
-            // P1 (Cyan) digambar di luar kondisi stik agar selalu terlihat
-            ctx.fillStyle = p1.color;
-            ctx.fillRect(p1.x, p1.y, p1.width, p1.height);
-
-            // Komputer AI (Pink)
-            ctx.fillStyle = ai.color;
-            ctx.fillRect(ai.x, ai.y, ai.width, ai.height);
-
-            requestAnimationFrame(gameLoop);
         }
 
-        // Jalankan game secara instan saat halaman dibuka
-        gameLoop();
+        // Deteksi tabrakan
+        function collide(arena, player) {
+            const [m, o] = [player.matrix, player.pos];
+            for (let y = 0; y < m.length; ++y) {
+                for (let x = 0; x < m[y].length; ++x) {
+                    if (m[y][x] !== 0 &&
+                       (arena[y + o.y] &&
+                        arena[y + o.y][x + o.x]) !== 0) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        // Membuat matriks kosong untuk arena game
+        function createMatrix(w, h) {
+            const matrix = [];
+            while (h--) {
+                matrix.push(new Array(w).fill(0));
+            }
+            return matrix;
+        }
+
+        // Membuat bentuk-bentuk blok Tetris (Tetrominoes)
+        function createPiece(type) {
+            if (type === 'T') {
+                return [
+                    [0, 0, 0],
+                    [1, 1, 1],
+                    [0, 1, 0],
+                ];
+            } else if (type === 'O') {
+                return [
+                    [2, 2],
+                    [2, 2],
+                ];
+            } else if (type === 'L') {
+                return [
+                    [0, 3, 0],
+                    [0, 3, 0],
+                    [0, 3, 3],
+                ];
+            } else if (type === 'J') {
+                return [
+                    [0, 4, 0],
+                    [0, 4, 0],
+                    [4, 4, 0],
+                ];
+            } else if (type === 'I') {
+                return [
+                    [0, 5, 0, 0],
+                    [0, 5, 0, 0],
+                    [0, 5, 0, 0],
+                    [0, 5, 0, 0],
+                ];
+            } else if (type === 'S') {
+                return [
+                    [0, 6, 6],
+                    [6, 6, 0],
+                    [0, 0, 0],
+                ];
+            } else if (type === 'Z') {
+                return [
+                    [7, 7, 0],
+                    [0, 7, 7],
+                    [0, 0, 0],
+                ];
+            }
+        }
+
+        // Warna untuk masing-masing blok
+        const colors = [
+            null,
+            '#FF0D72', // T
+            '#0DC2FF', // O
+            '#0DFF72', // L
+            '#F538FF', // J
+            '#FF8E0D', // I
+            '#FFE138', // S
+            '#3877FF', // Z
+        ];
+
+        // Menggambar matriks (blok atau arena) pada canvas
+        function drawMatrix(matrix, offset) {
+            matrix.forEach((row, y) => {
+                row.forEach((value, x) => {
+                    if (value !== 0) {
+                        context.fillStyle = colors[value];
+                        context.fillRect(x + offset.x, y + offset.y, 1, 1);
+                    }
+                });
+            });
+        }
+
+        // Fungsi utama menggambar ulang game
+        function draw() {
+            context.fillStyle = '#111';
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            drawMatrix(arena, {x: 0, y: 0});
+            drawMatrix(player.matrix, player.pos);
+        }
+
+        // Menggabungkan blok pemain ke arena saat mendarat
+        function merge(arena, player) {
+            player.matrix.forEach((row, y) => {
+                row.forEach((value, x) => {
+                    if (value !== 0) {
+                        arena[y + player.pos.y][x + player.pos.x] = value;
+                    }
+                });
+            });
+        }
+
+        // Logika penurunan blok otomatis
+        let dropCounter = 0;
+        let dropInterval = 1000; // 1 detik per turun
+
+        let lastTime = 0;
+        function update(time = 0) {
+            const deltaTime = time - lastTime;
+            lastTime = time;
+
+            dropCounter += deltaTime;
+            if (dropCounter > dropInterval) {
+                playerDrop();
+            }
+
+            draw();
+            requestAnimationFrame(update);
+        }
+
+        // Aksi menurunkan blok
+        function playerDrop() {
+            player.pos.y++;
+            if (collide(arena, player)) {
+                player.pos.y--;
+                merge(arena, player);
+                playerReset();
+                arenaSweep();
+                updateScore();
+            }
+            dropCounter = 0;
+        }
+
+        // Aksi menggeser blok ke kiri/kanan
+        function playerMove(dir) {
+            player.pos.x += dir;
+            if (collide(arena, player)) {
+                player.pos.x -= dir;
+            }
+        }
+
+        // Mereset blok baru di atas setelah yang lama mendarat
+        function playerReset() {
+            const pieces = 'ILJOTSZ';
+            player.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
+            player.pos.y = 0;
+            player.pos.x = (arena[0].length / 2 | 0) - (player.matrix[0].length / 2 | 0);
+            
+            // Jika saat reset langsung tabrakan, berarti Game Over
+            if (collide(arena, player)) {
+                arena.forEach(row => row.fill(0));
+                player.score = 0;
+                updateScore();
+            }
+        }
+
+        // Memutar blok (Rotasi)
+        function playerRotate(dir) {
+            const pos = player.pos.x;
+            let offset = 1;
+            rotate(player.matrix, dir);
+            while (collide(arena, player)) {
+                player.pos.x += offset;
+                offset = -(offset + (offset > 0 ? 1 : -1));
+                if (offset > player.matrix[0].length) {
+                    rotate(player.matrix, -dir);
+                    player.pos.x = pos;
+                    return;
+                }
+            }
+        }
+
+        // Algoritma rotasi matriks
+        function rotate(matrix, dir) {
+            for (let y = 0; y < matrix.length; ++y) {
+                for (let x = 0; x < y; ++x) {
+                    [
+                        matrix[x][y],
+                        matrix[y][x],
+                    ] = [
+                        matrix[y][x],
+                        matrix[x][y],
+                    ];
+                }
+            }
+
+            if (dir > 0) {
+                matrix.forEach(row => row.reverse());
+            } else {
+                matrix.reverse();
+            }
+        }
+
+        // Memperbarui tampilan skor
+        function updateScore() {
+            document.getElementById('score').innerText = player.score;
+        }
+
+        // Inisialisasi Arena dan Pemain
+        const arena = createMatrix(10, 20);
+
+        const player = {
+            pos: {x: 0, y: 0},
+            matrix: null,
+            score: 0,
+        };
+
+        // Event listener untuk keyboard kontrol
+        document.addEventListener('keydown', event => {
+            if (event.keyCode === 37) {
+                playerMove(-1); // Panah Kiri
+            } else if (event.keyCode === 39) {
+                playerMove(1);  // Panah Kanan
+            } else if (event.keyCode === 40) {
+                playerDrop();   // Panah Bawah
+            } else if (event.keyCode === 38) {
+                playerRotate(1); // Panah Atas
+            }
+        });
+
+        // Mulai Game
+        playerReset();
+        updateScore();
+        update();
     </script>
 </body>
 </html>
