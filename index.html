@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPMB 2026 - SMP Negeri 4 Amlapura</title>
+    <!-- Menggunakan font Google Inter & Roboto untuk kejelasan tingkat tinggi -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --secondary-color: #1e3a8a;
+            --accent-color: #2563eb;
+            --success-bg: #f0fdf4;
+            --success-border: #bbf7d0;
+            --success-text: #166534;
+            --warning-bg: #fffbeb;
+            --warning-border: #fef3c7;
+            --warning-text: #92400e;
+            --danger-bg: #fef2f2;
+            --danger-border: #fee2e2;
+            --danger-text: #991b1b;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --bg-light: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-bottom: 4px solid #e2e8f0;
+        }
+
+        .header-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        /* Logo Sekolah Lambang Pendidikan Nasional */
+        .logo-sekolah {
+            width: 100px;
+            height: 100px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            padding: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.75px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            font-weight: 500;
+            opacity: 0.95;
+        }
+
+        .sub-header {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-top: 0.25rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        main {
+            flex: 1;
+            max-width: 650px;
+            width: 100%;
+            margin: 3.5rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .search-card {
+            background: #ffffff;
+            padding: 3rem 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .search-card h2 {
+            margin-bottom: 1.5rem;
+            color: #0f172a;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #334155;
+            font-size: 0.95rem;
+            text-align: left;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            font-size: 1.25rem;
+            font-family: 'Roboto', monospace;
+            font-weight: 700;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            text-align: center;
+            letter-spacing: 3px;
+            color: #0f172a;
+            background-color: #f8fafc;
+            transition: all 0.2s ease-in-out;
+        }
+
+        input[type="text"]::placeholder {
+            letter-spacing: normal;
+            font-weight: 400;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            color: #94a3b8;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+            transition: all 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+            box-shadow: 0 6px 8px -1px rgba(29, 78, 216, 0.3);
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .result-container {
+            margin-top: 2.5rem;
+            display: none;
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .alert {
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: left;
+            border: 1px solid transparent;
+        }
+
+        .alert-success {
+            background-color: var(--success-bg);
+            border-color: var(--success-border);
+            color: var(--success-text);
+        }
+
+        .alert-warning {
+            background-color: var(--warning-bg);
+            border-color: var(--warning-border);
+            color: var(--warning-text);
+        }
+
+        .alert-danger {
+            background-color: var(--danger-bg);
+            border-color: var(--danger-border);
+            color: var(--danger-text);
+        }
+
+        .alert h3 {
+            margin-bottom: 1.25rem;
+            font-size: 1.35rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+            padding-bottom: 0.75rem;
+        }
+
+        .student-details table {
+            width: 100%;
+            margin-top: 0.5rem;
+            border-collapse: collapse;
+        }
+
+        .student-details td {
+            padding: 0.6rem 0;
+            font-size: 1.05rem;
+            vertical-align: top;
+        }
+
+        .student-details td:first-child {
+            font-weight: 600;
+            width: 38%;
+            color: #475569;
+        }
+
+        /* Jika berada dalam box alert-success, ubah sedikit warna label */
+        .alert-success .student-details td:first-child { color: #1e3a1e; }
+        .alert-warning .student-details td:first-child { color: #451a03; }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.35rem 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .badge-diterima { background-color: #16a34a; color: #ffffff; }
+        .badge-proses { background-color: #d97706; color: #ffffff; }
+
+        .note-text {
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.5;
+            padding-top: 1rem;
+            border-top: 1px dashed rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #f1f5f9;
+            text-align: center;
+            padding: 2rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-top: 1px solid #e2e8f0;
+            margin-top: auto;
+        }
+
+        footer p {
+            margin-bottom: 0.25rem;
+        }
+
+        @media (max-width: 540px) {
+            header { padding: 2rem 1rem; }
+            header h1 { font-size: 1.5rem; }
+            header p { font-size: 1rem; }
+            main { margin: 1.5rem auto; }
+            .search-card { padding: 2rem 1.25rem; }
+            .student-details td { display: block; width: 100% !important; padding: 0.25rem 0; }
+            .student-details td:first-child { font-weight: 700; margin-top: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <!-- LOGO RESMI INDONESIA (Lambang Tut Wuri Handayani / Pendidikan) -->
+            <svg class="logo-sekolah" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="46" fill="#1e3a8a"/>
+                <circle cx="50" cy="50" r="41" fill="#ffffff"/>
+                <path d="M50,16 L82,42 L72,78 L50,86 L28,78 L18,42 Z" fill="#2563eb"/>
+                <polygon points="50,24 74,44 64,72 50,78 36,72 26,44" fill="#f59e0b"/>
+                <path d="M50,30 L63,47 L56,47 L56,66 L44,66 L44,47 L37,47 Z" fill="#ffffff"/>
+                <circle cx="50" cy="40" r="4" fill="#ef4444"/>
+            </svg>
+            <div>
+                <h1>SMP Negeri 4 Amlapura</h1>
+                <p>Sistem Penerimaan Murid Baru (SPMB) Tahun 2026</p>
+                <p class="sub-header">Desa Bugbug, Karangasem, Provinsi Bali</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="search-card">
+            <h2>Pencarian Hasil Seleksi</h2>
+            <div class="form-group">
+                <label for="nisnInput" class="input-label">Nomor Induk Siswa Nasional (NISN)</label>
+                <input type="text" id="nisnInput" placeholder="Contoh: 013XXXXXXX" maxlength="10" autocomplete="off">
+            </div>
+            <button onclick="periksaHasil()">Cek Status Pendaftaran</button>
+
+            <div id="resultContainer" class="result-container">
+                <!-- Hasil kelulusan diisikan otomatis via JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Panitia PPDB / SPMB SMP Negeri 4 Amlapura.</p>
+        <p>Seluruh data kelulusan berjumlah 209 siswa resmi terverifikasi.</p>
+    </footer>
+
+    <script>
+        // Data Resmi Penerimaan Berjumlah 209 Siswa Sesuai Berkas Berkas Kelulusan Anda
+        const databaseSiswa = {
+    "0146405521": {
+        "nama": "I Kadek Doni Artha Yasa",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Afirmasi",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "3131389712": {
+        "nama": "I Kadek Sudani",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Afirmasi",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "3148168475": {
+        "nama": "Ni Luh Febri Arianti",
+        "gender": "Perempuan",
+        "jalur": "Jalur Afirmasi",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "3132729862": {
+        "nama": "I Nengah Pradnyana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Afirmasi",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "0144591826": {
+        "nama": "I Kadek Satya Suadyana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Afirmasi",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "3143938023": {
+        "nama": "I Komang Maesa Putra",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Afirmasi",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "3142219572": {
+        "nama": "Ni Kadek Febri Tya Puspita",
+        "gender": "Perempuan",
+        "jalur": "Jalur Afirmasi",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "3131150063": {
+        "nama": "Ni Komang Purnami",
+        "gender": "Perempuan",
+        "jalur": "Jalur Afirmasi",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "0133848524": {
+        "nama": "Ni Komang Witari Astuti",
+        "gender": "Perempuan",
+        "jalur": "Jalur Afirmasi",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "0136738471": {
+        "nama": "I Made Terang",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Afirmasi",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "3125794746": {
+        "nama": "Ni Komang Meriyanti",
+        "gender": "Perempuan",
+        "jalur": "Jalur Afirmasi",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "0133865697": {
+        "nama": "I Putu Gede Mahendra",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Afirmasi",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "0138165223": {
+        "nama": "I Kadek Agus Dwi Juni Artawan",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Afirmasi",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "3136632389": {
+        "nama": "I Wayan Doni Saputra",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Afirmasi",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "0149222124": {
+        "nama": "Ni Komang Indri Maheswari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Afirmasi",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "3138676973": {
+        "nama": "Ni Nengah Mariani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Afirmasi",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "3141755380": {
+        "nama": "Ni Luh Ariani Dewi",
+        "gender": "Perempuan",
+        "jalur": "Jalur Afirmasi",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "0135475208": {
+        "nama": "I Gede Aditya Aryasatya",
+        "gender": "Laki-laki",
+        "jalur": "Prestasi Akademik/Non Akademik",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "0133202059": {
+        "nama": "I Wayan Agus Aditya Ananda",
+        "gender": "Laki-laki",
+        "jalur": "Prestasi Akademik/Non Akademik",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "0135604701": {
+        "nama": "I Kade Riski Putra Prananda",
+        "gender": "Laki-laki",
+        "jalur": "Prestasi Akademik/Non Akademik",
+        "status": "Diterima",
+        "pesan": ""
+    },
+    "0142387516": {
+        "nama": "Ni Kade Sri Suniari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0136142919": {
+        "nama": "Ketut Epan Bujan Pratama",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0137654979": {
+        "nama": "I Kade Nara Mahardika",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0138529029": {
+        "nama": "I Komang sujana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0136435445": {
+        "nama": "I Ketut Dipta Artayasa",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0138595180": {
+        "nama": "Ni Putu Indah Lestari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0139257620": {
+        "nama": "I Komang Aryadiputra",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0138665035": {
+        "nama": "I Made Setiawan",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0136949583": {
+        "nama": "I Wayan Yudika Dodi Praptayuda",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0133731606": {
+        "nama": "NI KOMANG WINI YANI",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0141389382": {
+        "nama": "Ni Ketut Sriwahyuni",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0137721707": {
+        "nama": "Ni Ketut Geysha Yuliani Puspita Dewi",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0144714422": {
+        "nama": "I Nyoman Sukerta Dana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0135167386": {
+        "nama": "I Kadek Erdi Juniarta",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0148462356": {
+        "nama": "Ni Putu Selcyani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0139385871": {
+        "nama": "Ni Putu Intan Natasya Sarasitha",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0138344985": {
+        "nama": "Ni Putu Cahaya Sry Devi",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0148308409": {
+        "nama": "Ni Luh Sri Ayuni",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0141065355": {
+        "nama": "Ni Komang Suci Antari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0136907510": {
+        "nama": "Ni Wayan Sri Wahyuni",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0139059787": {
+        "nama": "I Wayan Agus Candra Valguna",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0147256784": {
+        "nama": "I Kade Dwi Candra Winata",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0132273484": {
+        "nama": "Ni Kade Chandra Puspita",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "3130824301": {
+        "nama": "Ni Putu Mika Widyani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0135107475": {
+        "nama": "Ni Kade Puspa Arini",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "3135843180": {
+        "nama": "Ni Komang Novianti",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0133917440": {
+        "nama": "Ni Luh Desy Wulandari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0135936585": {
+        "nama": "I Ketut Randy Crisnayana Vernando",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "3141907086": {
+        "nama": "I Made Agus Aryawinata",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0142471249": {
+        "nama": "I Kade Tirta Febrian",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0132591740": {
+        "nama": "Ni Nengah Raisa Widhiari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0144308803": {
+        "nama": "I Kadek Adi Widyatmika",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0136410910": {
+        "nama": "I Kadek Dika Wahyu Satyawan",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0139858328": {
+        "nama": "Ni Nengah Asihyana Are Devi",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0134002449": {
+        "nama": "Ni Nengah Vania Dea Asmariani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0135139697": {
+        "nama": "I Kadek Mahardika Widiartha",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0129150706": {
+        "nama": "Ni Luh Novi Seri Purnami",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0133962107": {
+        "nama": "Komang Widhi Arsana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0141641211": {
+        "nama": "I Komang Andy Praditya",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0136647787": {
+        "nama": "Ni Ketut Sriani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0141941502": {
+        "nama": "Ni Komang Michely Widnyani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0135262598": {
+        "nama": "Ni Komang Ella Muryanti Putri",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0136343432": {
+        "nama": "Ni Komang Sri Agustini",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0145310354": {
+        "nama": "Ni Ketut Ayu Suci Praditha Tristianty",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0132808086": {
+        "nama": "I Ketut Bagus Rai Suartana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0142594297": {
+        "nama": "Ni Kade Sri Wahyuni",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "3146511670": {
+        "nama": "Ni Komang Natalya Armita",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0147569749": {
+        "nama": "I Ketut Wira Sentana Dwi Putra",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0137672841": {
+        "nama": "KADE DIAN LEONI",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0132574392": {
+        "nama": "Ni Kadek Rahayu Chandra Dewi",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "3122489124": {
+        "nama": "Ni Kade Mariani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0144604522": {
+        "nama": "I Gusti Bagus Arjuna Ditya Pratama",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0146344506": {
+        "nama": "Ni Komang Dea Tri Yasa Dewi",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0138555233": {
+        "nama": "Ni Komang Feby Febriani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "3131485985": {
+        "nama": "I GEDE RIPAN MAHARDI",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0142016038": {
+        "nama": "I Gede Agus Hredaya",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0133343855": {
+        "nama": "I Wayan Satya Abhinaya",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0147921561": {
+        "nama": "I Gede Aditya Prawira",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0144165361": {
+        "nama": "Ni Komang Venni Rosiani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0142093439": {
+        "nama": "I Wayan Widya Candra",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0131918400": {
+        "nama": "I Made Bawa Murdana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0146665520": {
+        "nama": "I Kade Riski Arista Cahya Primadana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0135579914": {
+        "nama": "Ni Ketut Nataliantari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0137497463": {
+        "nama": "I Made Gunantara",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0149207038": {
+        "nama": "Ni Kadek Keisha Airani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0145682301": {
+        "nama": "Ni Kade Nadila Putriana",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0139298332": {
+        "nama": "I Gede Artha Setiawan",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0145693507": {
+        "nama": "I Ketut Angga Mahendra",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0148636343": {
+        "nama": "I Kadek Deva Maya Pramesta",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0146563817": {
+        "nama": "Gede Angga Widyatmika",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0139785677": {
+        "nama": "Ni Ketut Wulan Suantari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0137941269": {
+        "nama": "I Kade Ngurah Ananda Laksmana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0135356851": {
+        "nama": "I Kade Rama Aditya",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0138518833": {
+        "nama": "Ni Luh Kinara Putri Deviarini",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0135320288": {
+        "nama": "Ni Komang Sri Purnamawati",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0133887449": {
+        "nama": "Ni Kadek Viora Dyandra Manda",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0137759972": {
+        "nama": "Ni Wayan Mutriyani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0132156310": {
+        "nama": "Ni Komang Cahya Pramudita",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0136084754": {
+        "nama": "I Komang Oktama Sukandarista",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0135092264": {
+        "nama": "Ni Komang Gayatri Dipayani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0144330838": {
+        "nama": "Ni Luh Mearlin Kurnia Putri",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0145846506": {
+        "nama": "Ni Wayan Anggreni",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0131386462": {
+        "nama": "I Kade Pradivta Dwipayana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0148488294": {
+        "nama": "Ni Made Sinta Adnyawati",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0135151230": {
+        "nama": "I Nengah Raditya Dwi Susila Putra",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0148885767": {
+        "nama": "I Ketut Digjaya",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0144993902": {
+        "nama": "I Gusti Ayu Diah Janaki Putri Pradnyani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0146908269": {
+        "nama": "Ni Kade Adisanthika Uttari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0137325875": {
+        "nama": "Ni Wayan Eka Widiyanti",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "3143852606": {
+        "nama": "I Komang Chandra Riski Sadyahana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0136187263": {
+        "nama": "Ni Luh Suputri Rahayu",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0133987553": {
+        "nama": "Ni Kadek Dwi Darmayanti",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0148698039": {
+        "nama": "Ni Ketut Maytria Kartika Sari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0132150492": {
+        "nama": "Ketut Reyhan Dhananjaya Andira Putra",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0136953896": {
+        "nama": "I Nyoman Widi Sastrawan",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0141750258": {
+        "nama": "Ni Wayan Dewi Widyastuti",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0136961461": {
+        "nama": "I Komang Satria Adi Prayana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0135715936": {
+        "nama": "Ni Putu Angela Intan Swantari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0135626209": {
+        "nama": "I Made Andi Wira Premana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0144754209": {
+        "nama": "Ni Kadek Ersa Putri",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0135543578": {
+        "nama": "I Gede Hendra Wahyu Permana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0136974186": {
+        "nama": "Ni Putu Sri Wiryaningsih",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "3142479903": {
+        "nama": "I Komang Tegar Candrama",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0141262052": {
+        "nama": "I Ketut Kariyana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0147696557": {
+        "nama": "Gusti Ngurah Widyadnyana Kumara",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0138412829": {
+        "nama": "Yudha Resantha Alfaro",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0133921106": {
+        "nama": "Ni Komang Sinta Sri Wahyuni",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "3146072445": {
+        "nama": "Ni Putu Candra Putri Damayani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0132689019": {
+        "nama": "Ni Putu Ayu Astrid Juniantari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0139914250": {
+        "nama": "I Kade Chandra Dwi Winata",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0135441782": {
+        "nama": "Ni Kadek Ari Darmayanti",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0141360789": {
+        "nama": "I Komang Sila Astawa",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0138689999": {
+        "nama": "Ni Nengah Susanti Asih",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0133057928": {
+        "nama": "I Putu Agus Arta Wiguna",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0144338196": {
+        "nama": "I Komang Wisna Wiranata",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "3137397853": {
+        "nama": "Ni Nyoman Putri Sekar Parwati",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0135596066": {
+        "nama": "I Putu Ditya Christian Permana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "3146407604": {
+        "nama": "Ni Ketut Juni Parwani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0146700003": {
+        "nama": "I Komang Raditia Darma Putra",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0144894814": {
+        "nama": "Ni Komang Devi Puspitasari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0138324909": {
+        "nama": "Ni Komang Tisya Pradnyaswari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0131765489": {
+        "nama": "I Nyoman Risky Karunia Pratama",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0139546392": {
+        "nama": "Ni Komang Setiya Dewi",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0138946373": {
+        "nama": "I Gede Dedi Arta Utama",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0134794106": {
+        "nama": "I Ketut Wira Bawa Tanaya",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0144073053": {
+        "nama": "Ni Komang Yuni Kusuma Yanti",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0135331991": {
+        "nama": "I Ketut Sandhi Jaya Widiastra",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0131313182": {
+        "nama": "Ni Nengah Duwik Oktaviani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0136436188": {
+        "nama": "Ni Ketut Lina Supartini",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0138090847": {
+        "nama": "Ni Luh Eka Candrawati",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0145445606": {
+        "nama": "I Komang Andre Wijaya",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0149292125": {
+        "nama": "I Ketut Reza Raditya",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0133917023": {
+        "nama": "Ni Luh Mita Pratiwi",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "3134164571": {
+        "nama": "Ni Ketut Sarina Juni",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0133632994": {
+        "nama": "Ni Nengah Nia Dharma Putri",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0144512570": {
+        "nama": "Ni Nyoman Ayu Triya Kartini Putri",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0146075146": {
+        "nama": "Ni Komang Tri Meisyarani Astika Putri",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0144757400": {
+        "nama": "I Kade Juna Satria Adinata",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0145532856": {
+        "nama": "I Kadek Arthayasa Dwi Permana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0144179591": {
+        "nama": "Ni Wayan Juni Antari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0131229721": {
+        "nama": "I MADE REFAN PUTRA SUGIARTA",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0131087000": {
+        "nama": "I Made Yoga Setiawan",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0131893987": {
+        "nama": "Putu Agus Adi Arta",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0148452904": {
+        "nama": "I Gusti Ayu Sani Sanila",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0144348221": {
+        "nama": "I Wayan Gilang Wrespayana Widi Astawa",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0136975227": {
+        "nama": "I Putu Aryadinata Putra",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0134571448": {
+        "nama": "I Kade Sandhi Aditya",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0141237301": {
+        "nama": "I Kade Agus Widiantara",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0133044182": {
+        "nama": "I Ketut Merta Ardana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0132472969": {
+        "nama": "Ni Kadek Cintya Maharani Putri",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0135292752": {
+        "nama": "Ni Luh Ayu Galuh Shanti Maharani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0134022764": {
+        "nama": "I Kadek Satya Agusta Dwipayana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0132679927": {
+        "nama": "Ni Wayan Sriwidiastuti",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0134448664": {
+        "nama": "Ni Komang Dewi Sikiari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0143078739": {
+        "nama": "Ni Made Ita Aprilia",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0148289782": {
+        "nama": "Ni Kade Sujani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0136304220": {
+        "nama": "Ni Luh Dewi Cahyani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0148972685": {
+        "nama": "I Kadek Darma Putra",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0144601654": {
+        "nama": "Ni Ketut Diah Maharani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0133634614": {
+        "nama": "Ni Ketut Merta Sari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "3133840611": {
+        "nama": "Ni Ketut Juni Astiti",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0145533176": {
+        "nama": "Ni Kade Intan Adelia Putri",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0146806889": {
+        "nama": "I Made Aryana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0134124107": {
+        "nama": "I Komang Okta Pradnyana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0149522876": {
+        "nama": "Ni Kadek Wulan Januarthi",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0144291805": {
+        "nama": "Ni Nengah Sri Muliyani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0131563634": {
+        "nama": "Ni Kade Usmira Dewi",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0143833161": {
+        "nama": "Ni Komang Yunita Adelina Reginatalia",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "3140981241": {
+        "nama": "I Ketut Agus Artayana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "3131362298": {
+        "nama": "I Nyoman Ari Githa Swara",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0132216830": {
+        "nama": "I Wayan Risky",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0147030061": {
+        "nama": "I Gede Yeshaya Gita Gerarda",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0142121587": {
+        "nama": "Ni Wayan Muliani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0133623707": {
+        "nama": "Ni Wayan Sri Lestari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0147796252": {
+        "nama": "Ni Putu Cessya Arista Putri",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0147447634": {
+        "nama": "I Ketut Tri Adnyana",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0137046302": {
+        "nama": "I Nyoman Juniadi Arimbawa",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0136172258": {
+        "nama": "Ni Ketut Sintya Putri Cahyani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "3142802803": {
+        "nama": "I Komang Suardika",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0142764893": {
+        "nama": "Ni Putu Dewi Muliantari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0147165274": {
+        "nama": "Luh Putu Aninditha Utami Maheswari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0139253836": {
+        "nama": "Ni Kadek Desya Prita Wulan Sari",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0149876631": {
+        "nama": "I Ketut Agus Widiantara",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0138753356": {
+        "nama": "I Ketut Picanmerta Sunarjaya",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0138581937": {
+        "nama": "Ni Ketut Oktavianingsih",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0135945321": {
+        "nama": "Ni Luh Herna",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0132257436": {
+        "nama": "I Komang Bagus Suartawan",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0142168424": {
+        "nama": "Ni Luh Eka Ariani",
+        "gender": "Perempuan",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    },
+    "0142266699": {
+        "nama": "I Ketut Wahyu Putra Arta Wibawa",
+        "gender": "Laki-laki",
+        "jalur": "Jalur Domisili",
+        "status": "Pending",
+        "pesan": "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026"
+    }
+};
+
+        function periksaHasil() {
+            const inputField = document.getElementById('nisnInput');
+            const rawInput = inputField.value.trim();
+            const container = document.getElementById('resultContainer');
+            
+            if (rawInput === "") {
+                alert("Silakan masukkan nomor NISN Anda terlebih dahulu.");
+                inputField.focus();
+                return;
+            }
+
+            // Normalisasi padding input jika di bawah 10 digit angka
+            let formattedInput = rawInput;
+            if (/^\d+$/.test(rawInput) && rawInput.length < 10) {
+                formattedInput = rawInput.padStart(10, '0');
+            }
+
+            // Tampilkan container hasil pendaftaran
+            container.style.display = "block";
+
+            if (databaseSiswa[formattedInput]) {
+                const siswa = databaseSiswa[formattedInput];
+                
+                if (siswa.status === "Diterima") {
+                    container.innerHTML = `
+                        <div class="alert alert-success">
+                            <h3>🎉 Selamat! Anda Dinyatakan Lulus</h3>
+                            <div class="student-details">
+                                <table>
+                                    <tr><td>Nama Lengkap</td><td>: <strong>${siswa.nama}</strong></td></tr>
+                                    <tr><td>Jenis Kelamin</td><td>: ${siswa.gender}</td></tr>
+                                    <tr><td>Jalur Pendaftaran</td><td>: ${siswa.jalur}</td></tr>
+                                    <tr><td>Status Kelulusan</td><td>: <span class="status-badge badge-diterima">DITERIMA</span></td></tr>
+                                </table>
+                            </div>
+                            <p class="note-text">
+                                <strong>Langkah Selanjutnya:</strong><br>
+                                Selamat bergabung di SMP Negeri 4 Amlapura! Silakan lakukan proses daftar ulang fisik dengan membawa berkas persyaratan (SKL asli, Fotokopi Kartu Keluarga, dan cetak halaman pengumuman ini) ke sekretariat sekolah sesuai jadwal operasional.
+                            </p>
+                        </div>
+                    `;
+                } else if (siswa.status === "Pending") {
+                    container.innerHTML = `
+                        <div class="alert alert-warning">
+                            <h3>⏳ Informasi Penjadwalan</h3>
+                            <div class="student-details">
+                                <table>
+                                    <tr><td>Nama Lengkap</td><td>: <strong>${siswa.nama}</strong></td></tr>
+                                    <tr><td>Jalur Pendaftaran</td><td>: ${siswa.jalur}</td></tr>
+                                    <tr><td>Status Hasil</td><td>: <span class="status-badge badge-proses">BELUM RILIS</span></td></tr>
+                                </table>
+                            </div>
+                            <p class="note-text" style="color: var(--warning-text);">
+                                <strong>Pemberitahuan Resmi:</strong><br>
+                                ${siswa.pesan}
+                            </p>
+                        </div>
+                    `;
+                } else {
+                    // Status alternatif cadangan jika ada status kustom lainnya
+                    container.innerHTML = `
+                        <div class="alert alert-warning">
+                            <h3>Status Pendaftaran</h3>
+                            <div class="student-details">
+                                <table>
+                                    <tr><td>Nama Lengkap</td><td>: <strong>${siswa.nama}</strong></td></tr>
+                                    <tr><td>Jalur Pendaftaran</td><td>: ${siswa.jalur}</td></tr>
+                                    <tr><td>Status Hasil</td><td>: <span class="status-badge">${siswa.status}</span></td></tr>
+                                </table>
+                            </div>
+                        </div>
+                    `;
+                }
+            } else {
+                container.innerHTML = `
+                    <div class="alert alert-danger">
+                        <h3>❌ Data Tidak Ditemukan</h3>
+                        <p style="margin-bottom: 0.5rem;">Nomor NISN <strong>${rawInput}</strong> tidak terdaftar dalam pangkalan data SPMB 2026 SMP Negeri 4 Amlapura.</p>
+                        <p style="font-size: 0.9rem; color: #7f1d1d;">*Pastikan nomor NISN yang dimasukkan sudah benar (10 digit). Jika Anda merasa mendaftar tetapi data tidak muncul, silakan hubungi Ruang Sekretariat Panitia PPDB sekolah dengan membawa bukti formulir pendaftaran awal.</p>
+                    </div>
+                `;
+            }
+            
+            // Auto scroll tipis ke arah hasil agar terlihat jelas oleh pengguna HP
+            container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Aktifkan fungsi enter pada kolom inputan keyboard
+        document.getElementById("nisnInput").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                periksaHasil();
+            }
+        });
+    </script>
+</body>
+</html>
