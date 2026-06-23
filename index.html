@@ -3,316 +3,329 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Tetris Sederhana</title>
+    <title>SPMB 2026 - SMP Negeri 4 Amlapura</title>
     <style>
-        body {
-            background-color: #202020;
-            color: #fff;
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2b6cb0;
+            --accent-color: #3182ce;
+            --success-color: #2f855a;
+            --warning-color: #dd6b20;
+            --text-dark: #2d3748;
+            --bg-light: #f7fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 800px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
+            gap: 1rem;
         }
 
-        h1 {
-            margin-bottom: 10px;
+        /* Placeholder Logo Sekolah - Menggunakan SVG bawaan agar langsung tampil bagus */
+        .logo-sekolah {
+            width: 90px;
+            height: 90px;
+            background-color: white;
+            border-radius: 50%;
+            padding: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
 
-        #score-board {
-            font-size: 24px;
-            margin-bottom: 20px;
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
-        /* Ukuran canvas: 10 kolom x 20 baris (dikali 20px per kotak) */
-        canvas {
-            border: 4px solid #fff;
-            background-color: #111;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
         }
 
-        .instructions {
-            margin-top: 20px;
-            color: #aaa;
+        main {
+            flex: 1;
+            max-width: 600px;
+            width: 100%;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        .search-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
             text-align: center;
-            font-size: 14px;
+        }
+
+        .search-card h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-size: 1.4rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1.1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            text-align: center;
+            letter-spacing: 2px;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .result-container {
+            margin-top: 2rem;
+            display: none;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .alert {
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .alert-success {
+            background-color: #f0fff4;
+            border: 2px solid #c6f6d5;
+            color: #22543d;
+        }
+
+        .alert-warning {
+            background-color: #fffaf0;
+            border: 2px solid #feebc8;
+            color: #744210;
+        }
+
+        .alert-danger {
+            background-color: #fff5f5;
+            border: 2px solid #fed7d7;
+            color: #742a2a;
+        }
+
+        .alert h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding-bottom: 0.5rem;
+        }
+
+        .student-details table {
+            width: 100%;
+            margin-top: 0.5rem;
+            border-collapse: collapse;
+        }
+
+        .student-details td {
+            padding: 0.4rem 0;
+            font-size: 0.95rem;
+        }
+
+        .student-details td:first-child {
+            font-weight: 600;
+            width: 35%;
+            color: #4a5568;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .badge-diterima { background-color: #38a169; color: white; }
+        .badge-proses { background-color: #dd6b20; color: white; }
+
+        footer {
+            background-color: #edf2f7;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.85rem;
+            color: #718096;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 480px) {
+            header h1 { font-size: 1.4rem; }
+            main { margin: 1.5rem auto; }
+            .search-card { padding: 1.5rem 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <h1>TETRIS</h1>
-    <div id="score-board">Skor: <span id="score">0</span></div>
-    <canvas id="tetris" width="200" height="400"></canvas>
-    
-    <div class="instructions">
-        <p>Kontrol: ⬅️ Kiri | ➡️ Kanan | ⬆️ Putar | ⬇️ Turun Cepat</p>
-    </div>
+    <header>
+        <div class="header-container">
+            <svg class="logo-sekolah" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45" fill="#1a365d"/>
+                <polygon points="50,15 80,40 80,75 50,85 20,75 20,40" fill="#3182ce"/>
+                <path d="M50,25 L70,45 L60,45 L60,70 L40,70 L40,45 L30,45 Z" fill="#fff"/>
+                <text x="50" y="93" font-size="8" font-weight="bold" fill="#1a365d" text-anchor="middle">SMPN 4 AMLAPURA</text>
+            </svg>
+            <div>
+                <h1>SMP NEGERI 4 AMLAPURA</h1>
+                <p>Sistem Penerimaan Murid Baru (SPMB) Tahun 2026</p>
+                <p style="font-size: 0.85rem; margin-top: 0.2rem; opacity: 0.8;">Desa Bugbug, Karangasem, Bali</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="search-card">
+            <h2>Cek Status Kelulusan / Penerimaan</h2>
+            <div class="form-group">
+                <input type="text" id="nisnInput" placeholder="Masukkan 10 Digit NISN" maxlength="10">
+            </div>
+            <button onclick="periksaHasil()">Periksa Hasil</button>
+
+            <div id="resultContainer" class="result-container">
+                </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 SMP Negeri 4 Amlapura. All Rights Reserved.</p>
+        <p style="margin-top: 0.3rem; font-size: 0.75rem;">Panitia SPMB 2026 - Konten diperbarui secara berkala</p>
+    </footer>
 
     <script>
-        const canvas = document.getElementById('tetris');
-        const context = canvas.getContext('2d');
-
-        // Skala grid: 1 kotak = 20x20 piksel
-        context.scale(20, 20);
-
-        // Fungsi untuk menghapus baris yang penuh
-        function arenaSweep() {
-            let rowCount = 1;
-            outer: for (let y = arena.length - 1; y > 0; --y) {
-                for (let x = 0; x < arena[y].length; ++x) {
-                    if (arena[y][x] === 0) {
-                        continue outer;
-                    }
-                }
-                const row = arena.splice(y, 1)[0].fill(0);
-                arena.unshift(row);
-                ++y;
-
-                player.score += rowCount * 10;
-                rowCount *= 2;
-            }
-        }
-
-        // Deteksi tabrakan
-        function collide(arena, player) {
-            const [m, o] = [player.matrix, player.pos];
-            for (let y = 0; y < m.length; ++y) {
-                for (let x = 0; x < m[y].length; ++x) {
-                    if (m[y][x] !== 0 &&
-                       (arena[y + o.y] &&
-                        arena[y + o.y][x + o.x]) !== 0) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        // Membuat matriks kosong untuk arena game
-        function createMatrix(w, h) {
-            const matrix = [];
-            while (h--) {
-                matrix.push(new Array(w).fill(0));
-            }
-            return matrix;
-        }
-
-        // Membuat bentuk-bentuk blok Tetris (Tetrominoes)
-        function createPiece(type) {
-            if (type === 'T') {
-                return [
-                    [0, 0, 0],
-                    [1, 1, 1],
-                    [0, 1, 0],
-                ];
-            } else if (type === 'O') {
-                return [
-                    [2, 2],
-                    [2, 2],
-                ];
-            } else if (type === 'L') {
-                return [
-                    [0, 3, 0],
-                    [0, 3, 0],
-                    [0, 3, 3],
-                ];
-            } else if (type === 'J') {
-                return [
-                    [0, 4, 0],
-                    [0, 4, 0],
-                    [4, 4, 0],
-                ];
-            } else if (type === 'I') {
-                return [
-                    [0, 5, 0, 0],
-                    [0, 5, 0, 0],
-                    [0, 5, 0, 0],
-                    [0, 5, 0, 0],
-                ];
-            } else if (type === 'S') {
-                return [
-                    [0, 6, 6],
-                    [6, 6, 0],
-                    [0, 0, 0],
-                ];
-            } else if (type === 'Z') {
-                return [
-                    [7, 7, 0],
-                    [0, 7, 7],
-                    [0, 0, 0],
-                ];
-            }
-        }
-
-        // Warna untuk masing-masing blok
-        const colors = [
-            null,
-            '#FF0D72', // T
-            '#0DC2FF', // O
-            '#0DFF72', // L
-            '#F538FF', // J
-            '#FF8E0D', // I
-            '#FFE138', // S
-            '#3877FF', // Z
-        ];
-
-        // Menggambar matriks (blok atau arena) pada canvas
-        function drawMatrix(matrix, offset) {
-            matrix.forEach((row, y) => {
-                row.forEach((value, x) => {
-                    if (value !== 0) {
-                        context.fillStyle = colors[value];
-                        context.fillRect(x + offset.x, y + offset.y, 1, 1);
-                    }
-                });
-            });
-        }
-
-        // Fungsi utama menggambar ulang game
-        function draw() {
-            context.fillStyle = '#111';
-            context.fillRect(0, 0, canvas.width, canvas.height);
-
-            drawMatrix(arena, {x: 0, y: 0});
-            drawMatrix(player.matrix, player.pos);
-        }
-
-        // Menggabungkan blok pemain ke arena saat mendarat
-        function merge(arena, player) {
-            player.matrix.forEach((row, y) => {
-                row.forEach((value, x) => {
-                    if (value !== 0) {
-                        arena[y + player.pos.y][x + player.pos.x] = value;
-                    }
-                });
-            });
-        }
-
-        // Logika penurunan blok otomatis
-        let dropCounter = 0;
-        let dropInterval = 1000; // 1 detik per turun
-
-        let lastTime = 0;
-        function update(time = 0) {
-            const deltaTime = time - lastTime;
-            lastTime = time;
-
-            dropCounter += deltaTime;
-            if (dropCounter > dropInterval) {
-                playerDrop();
-            }
-
-            draw();
-            requestAnimationFrame(update);
-        }
-
-        // Aksi menurunkan blok
-        function playerDrop() {
-            player.pos.y++;
-            if (collide(arena, player)) {
-                player.pos.y--;
-                merge(arena, player);
-                playerReset();
-                arenaSweep();
-                updateScore();
-            }
-            dropCounter = 0;
-        }
-
-        // Aksi menggeser blok ke kiri/kanan
-        function playerMove(dir) {
-            player.pos.x += dir;
-            if (collide(arena, player)) {
-                player.pos.x -= dir;
-            }
-        }
-
-        // Mereset blok baru di atas setelah yang lama mendarat
-        function playerReset() {
-            const pieces = 'ILJOTSZ';
-            player.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
-            player.pos.y = 0;
-            player.pos.x = (arena[0].length / 2 | 0) - (player.matrix[0].length / 2 | 0);
-            
-            // Jika saat reset langsung tabrakan, berarti Game Over
-            if (collide(arena, player)) {
-                arena.forEach(row => row.fill(0));
-                player.score = 0;
-                updateScore();
-            }
-        }
-
-        // Memutar blok (Rotasi)
-        function playerRotate(dir) {
-            const pos = player.pos.x;
-            let offset = 1;
-            rotate(player.matrix, dir);
-            while (collide(arena, player)) {
-                player.pos.x += offset;
-                offset = -(offset + (offset > 0 ? 1 : -1));
-                if (offset > player.matrix[0].length) {
-                    rotate(player.matrix, -dir);
-                    player.pos.x = pos;
-                    return;
-                }
-            }
-        }
-
-        // Algoritma rotasi matriks
-        function rotate(matrix, dir) {
-            for (let y = 0; y < matrix.length; ++y) {
-                for (let x = 0; x < y; ++x) {
-                    [
-                        matrix[x][y],
-                        matrix[y][x],
-                    ] = [
-                        matrix[y][x],
-                        matrix[x][y],
-                    ];
-                }
-            }
-
-            if (dir > 0) {
-                matrix.forEach(row => row.reverse());
-            } else {
-                matrix.reverse();
-            }
-        }
-
-        // Memperbarui tampilan skor
-        function updateScore() {
-            document.getElementById('score').innerText = player.score;
-        }
-
-        // Inisialisasi Arena dan Pemain
-        const arena = createMatrix(10, 20);
-
-        const player = {
-            pos: {x: 0, y: 0},
-            matrix: null,
-            score: 0,
+        // Data Terenkapsulasi dari file afirmasi.xlsx
+        const dataSiswa = {
+            "0146405521": { nama: "I Kadek Doni Artha Yasa", gender: "Laki-laki", jalur: "Jalur Afirmasi", status: "Diterima", pesan: "" },
+            "3131389712": { nama: "I Kadek Sudani", gender: "Laki-laki", jalur: "Jalur Afirmasi", status: "Diterima", pesan: "" },
+            "3148168475": { nama: "Ni Luh Febri Arianti", gender: "Perempuan", jalur: "Jalur Afirmasi", status: "Diterima", pesan: "" },
+            "3132729862": { nama: "I Nengah Pradnyana", gender: "Laki-laki", jalur: "Jalur Afirmasi", status: "Diterima", pesan: "" },
+            "0144591826": { nama: "I Kadek Satya Suadyana", gender: "Laki-laki", jalur: "Jalur Afirmasi", status: "Diterima", pesan: "" },
+            "0132205561": { nama: "I Gede Sastra Wiguna", gender: "Laki-laki", jalur: "Jalur Domisili", status: "Pending", pesan: "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026" },
+            "0138581937": { nama: "Ni Ketut Oktavianingsih", gender: "Perempuan", jalur: "Jalur Domisili", status: "Pending", pesan: "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026" },
+            "0135945321": { nama: "Ni Luh Herna", gender: "Perempuan", jalur: "Jalur Domisili", status: "Pending", pesan: "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026" },
+            "0132257436": { nama: "I Komang Bagus Suartawan", gender: "Laki-laki", jalur: "Jalur Domisili", status: "Pending", pesan: "Maaf, Pengumuman untuk pendaftaran Khusus Jalur Domisili baru dapat dilihat Tanggal 30 Juni 2026" }
+            // Tambahkan sisa data baris siswa di sini jika diperlukan secara berkala
         };
 
-        // Event listener untuk keyboard kontrol
-        document.addEventListener('keydown', event => {
-            if (event.keyCode === 37) {
-                playerMove(-1); // Panah Kiri
-            } else if (event.keyCode === 39) {
-                playerMove(1);  // Panah Kanan
-            } else if (event.keyCode === 40) {
-                playerDrop();   // Panah Bawah
-            } else if (event.keyCode === 38) {
-                playerRotate(1); // Panah Atas
+        function periksaHasil() {
+            const input = document.getElementById('nisnInput').value.trim();
+            const container = document.getElementById('resultContainer');
+            
+            if (input === "") {
+                alert("Silakan masukkan NISN terlebih dahulu.");
+                return;
+            }
+
+            container.style.display = "block";
+
+            if (dataSiswa[input]) {
+                const siswa = dataSiswa[input];
+                
+                if (siswa.status === "Diterima") {
+                    container.innerHTML = `
+                        <div class="alert alert-success">
+                            <h3>Selamat! Anda Dinyatakan Diterima</h3>
+                            <div class="student-details">
+                                <table>
+                                    <tr><td>Nama Lengkap</td><td>: ${siswa.nama}</td></tr>
+                                    <tr><td>Jenis Kelamin</td><td>: ${siswa.gender}</td></tr>
+                                    <tr><td>Jalur Pendaftaran</td><td>: ${siswa.jalur}</td></tr>
+                                    <tr><td>Status</td><td>: <span class="status-badge badge-diterima">DITERIMA</span></td></tr>
+                                </table>
+                            </div>
+                            <p style="margin-top: 1rem; font-size: 0.85rem; color: #2f855a;">*Silakan melakukan pendaftaran kembali ke sekolah membawa berkas pendaftaran sesuai jadwal fisik.</p>
+                        </div>
+                    `;
+                } else if (siswa.status === "Pending") {
+                    container.innerHTML = `
+                        <div class="alert alert-warning">
+                            <h3>Informasi Pengumuman</h3>
+                            <div class="student-details" style="margin-bottom: 1rem;">
+                                <table>
+                                    <tr><td>Nama Lengkap</td><td>: ${siswa.nama}</td></tr>
+                                    <tr><td>Jalur Pendaftaran</td><td>: ${siswa.jalur}</td></tr>
+                                    <tr><td>Status</td><td>: <span class="status-badge badge-proses">BELUM RILIS</span></td></tr>
+                                </table>
+                            </div>
+                            <p><strong>Pemberitahuan:</strong> <br>${siswa.pesan}</p>
+                        </div>
+                    `;
+                }
+            } else {
+                container.innerHTML = `
+                    <div class="alert alert-danger">
+                        <h3>Data Tidak Ditemukan</h3>
+                        <p>Maaf, NISN <strong>${input}</strong> tidak terdaftar dalam basis data SPMB 2026 SMP Negeri 4 Amlapura. Periksa kembali nomor yang Anda masukkan atau hubungi Panitia PPDB di sekolah.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Trigger pencarian saat menekan tombol Enter
+        document.getElementById("nisnInput").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                periksaHasil();
             }
         });
-
-        // Mulai Game
-        playerReset();
-        updateScore();
-        update();
     </script>
 </body>
 </html>
