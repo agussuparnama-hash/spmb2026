@@ -1,0 +1,646 @@
+<!-- 1. BAGIAN PAMPLET (File 1) -->
+<!-- Copy & Paste seluruh isi file Pamplet Anda di sini -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengumuman Hasil Seleksi SMPN 4 Amlapura</title>
+    <style>
+        :root {
+            --primary-blue: #0A3C7C; /* Warna biru gelap */
+            --light-blue-bg: #EAF2F8; /* Warna latar belakang lembut */
+            --accent-yellow: #FFD700; /* Warna kuning emas untuk aksen */
+            --white: #FFFFFF;
+            --black: #000000;
+            --success-green: #28a745;
+            --danger-red: #dc3545;
+        }
+
+        body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;          /* Memberi jarak agar tidak mentok di pinggir HP */
+    color: var(--primary-blue);
+}
+
+        .pamphlet-container {
+            width: 100%;
+        max-width: 700px; /* Batas lebar agar tidak terlalu lebar di PC */
+        margin: 0 auto 20px auto;
+            background-color: var(--white);
+            background-image: linear-gradient(to bottom, #d6e8f7, var(--white));
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 2px solid #ccc;
+            position: relative;
+        }
+
+
+        /* Decorative Elements */
+        .decoration-leaves {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            opacity: 0.15;
+            background: 
+                url('https://i.ibb.co/L5Q7fN0/tropical-leaves.png') top left / 200px no-repeat,
+                url('https://i.ibb.co/L5Q7fN0/tropical-leaves.png') bottom right / 200px no-repeat;
+        }
+
+        /* Header Styling */
+        .header {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+        }
+
+        .school-logo {
+            width: 70px;
+            height: auto;
+            position: absolute;
+            left: 20px;
+            top: 15px;
+        }
+
+        .megaphone-icon {
+            width: 60px;
+            height: auto;
+            position: absolute;
+            right: 20px;
+            top: 10px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .header h2 {
+            margin: 5px 0;
+            font-size: 2.2em;
+            text-transform: uppercase;
+            font-weight: 900;
+            line-height: 1.1;
+        }
+
+        .header h3 {
+            margin: 5px 0 15px 0;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--accent-yellow);
+        }
+
+        .school-name {
+            font-size: 2.3em;
+            font-weight: 900;
+            margin: 10px 0;
+            color: var(--white);
+        }
+
+        .ta-banner {
+            background-color: var(--white);
+            color: var(--primary-blue);
+            display: inline-block;
+            padding: 8px 30px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+            border: 2px solid var(--primary-blue);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Main Info Section */
+        .main-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .quota-box {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            width: 160px;
+            flex-shrink: 0;
+        }
+
+        .quota-box h4 { margin: 0; font-size: 1em; font-weight: normal; }
+        .quota-number { font-size: 4em; font-weight: 900; margin: -5px 0; }
+        .quota-text { font-size: 1.1em; font-weight: bold; margin: -5px 0; text-transform: uppercase; }
+
+        .students-illustration {
+            width: 320px;
+            height: auto;
+            margin: 0 10px;
+        }
+
+        .pura-gate {
+            width: 140px;
+            height: auto;
+            opacity: 0.8;
+            flex-shrink: 0;
+        }
+
+        /* Table Section */
+        .table-section {
+            background-color: var(--light-blue-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .table-header {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 8px;
+            text-align: center;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .table-header span.star { color: var(--accent-yellow); font-size: 1.2em; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+
+       /* Pastikan th dan td memiliki perataan yang sama */
+th, td {
+    padding: 10px 15px; /* Tambahkan sedikit padding agar tidak terlalu rapat */
+    border-bottom: 1px solid #ddd;
+    text-align: center; /* Mengatur semua isi tabel rata tengah */
+}
+
+/* Jika ingin judul kolom rata tengah dan isi angka rata tengah */
+th {
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Khusus untuk kolom jumlah jika ingin lebih rapi */
+td:last-child {
+    text-align: center; /* Pastikan kolom terakhir (jumlah) selalu rata tengah */
+    font-weight: bold;
+}
+
+        th { font-weight: bold; color: var(--primary-blue); background-color: rgba(255,255,255,0.7); }
+        th:first-child, td:first-child { width: 5%; text-align: center; }
+        th:nth-child(2), td:nth-child(2) { width: 45%; text-align: left; padding-left: 10px; }
+
+        .gender-icons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .no-circle {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            margin: 0 auto;
+        }
+
+        .row-icon { margin-right: 5px; width: 16px; opacity: 0.7; }
+
+        .data-number-p { color: #d63384; font-weight: bold; } /* Pink for girls */
+
+        .total-row {
+            background-color: rgba(255,255,255,0.7);
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        /* Grid for lower sections */
+        .lower-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .info-box-styled {
+            background-color: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .info-box-header {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 10px;
+            text-align: center;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 1.1em;
+        }
+
+        .info-box-header.success { background-color: var(--success-green); }
+
+        /* Total Accepted Section */
+        .total-accepted-body {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .accepted-row {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 10px;
+        }
+
+        .accepted-item-detail { text-align: center; }
+        .accepted-number-large { font-size: 2.5em; font-weight: 900; line-height: 1; margin-bottom: 0px; }
+        .accepted-number-label { font-size: 0.8em; text-transform: uppercase; font-weight: bold; margin-top: 0px; }
+        .total-text { text-transform: uppercase; font-weight: 900; font-size: 1em; margin-bottom: 5px; display: block;}
+        .total-sum { background-color: var(--primary-blue); color: var(--white); padding: 10px 20px; border-radius: 20px; font-weight: bold; display: inline-block;}
+
+        /* Re-registration Status Section */
+        .re-reg-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 15px;
+            gap: 10px;
+            text-align: center;
+        }
+
+        .re-reg-block { padding: 5px; border-radius: 8px; border: 1px solid #eee; }
+        .re-reg-icon { font-size: 1.5em; display: block; margin-bottom: 5px; }
+        .re-reg-status-text { font-weight: bold; font-size: 0.8em; text-transform: uppercase; margin-bottom: 5px; display: block;}
+
+        .icon-success { color: var(--success-green); }
+        .icon-danger { color: var(--danger-red); }
+
+        .re-reg-counts { display: flex; justify-content: center; gap: 10px; margin-top: 5px; }
+        .count-detail-inline { font-weight: bold; font-size: 1.1em;}
+        .count-detail-inline .count-l { color: var(--primary-blue); }
+        .count-detail-inline .count-p { color: #d63384; }
+        .count-detail-inline .count-label { font-size: 0.6em; text-transform: uppercase; display: block; margin-top: -3px;}
+
+        .note-text { font-size: 0.7em; margin-top: 10px; font-style: italic; border-top: 1px solid #eee; padding-top: 5px; grid-column: span 2; color: #555;}
+
+        /* Total re-registered bar */
+        .total-re-reg-bar {
+            background-color: var(--success-green);
+            color: var(--white);
+            padding: 10px;
+            text-align: center;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 1.1em;
+        }
+
+        /* Bottom Section with important info & message */
+        .bottom-section {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .important-info-box {
+            background-color: #fbf8e5; /* soft yellow like post-it */
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px dashed #d1c18e;
+        }
+
+        .info-box-title {
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #d1c18e;
+            font-size: 0.85em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .check-list-icon { color: var(--success-green); font-size: 1.2em; font-weight: bold;}
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.85em;
+            line-height: 1.4;
+        }
+
+        .info-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 5px;
+        }
+
+        .info-list li::before {
+            content: '✓';
+            color: var(--success-green);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Congratulation Message */
+        .congrats-box {
+            background-color: #fff9fc; /* soft pink */
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            font-style: italic;
+            position: relative;
+            border: 1px dashed #f5c9da;
+        }
+        
+        .congrats-title { font-size: 1.1em; margin-bottom: 10px; color: #c44078; font-weight: 600;}
+        .congrats-motto { font-size: 0.85em; font-weight: 600; line-height: 1.3; color: var(--primary-blue); }
+        .heart-icon { font-style: normal; color: #d63384;}
+        .tape-image { width: 30px; position: absolute; top: -10px; left: -5px; }
+
+        /* Books image */
+        .books-pile {
+            position: absolute;
+            bottom: -5px;
+            right: 0px;
+            width: 60px;
+            height: auto;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 10px 25px;
+            font-size: 0.8em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom-left-radius: 13px;
+            border-bottom-right-radius: 13px;
+        }
+
+        .footer-item { display: flex; align-items: center; gap: 5px; }
+        .icon-map { opacity: 0.7; }
+        .footer a { color: var(--white); text-decoration: none; }
+
+    </style>
+</head>
+<body>
+
+    <div class="pamphlet-container">
+        <div class="decoration-leaves"></div>
+
+        <div class="header">
+            <img src="https://i.ibb.co/3s6D9sX/school-logo.png" alt="Logo Sekolah" class="school-logo">
+            <img src="https://i.ibb.co/jrkfDns/megaphone.png" alt="Megaphone" class="megaphone-icon">
+            <h3>PENGUMUMAN</h3>
+            <h1>HASIL SELEKSI</h1>
+            <h3>SISTEM PENERIMAAN MURID BARU (SPMB)</h3>
+            <div class="school-name">SMP NEGERI 4 AMLAPURA</div>
+            <div class="ta-banner">♥ TAHUN AJARAN 2026/2027 ♥</div>
+        </div>
+
+        <div class="main-content">
+            <div class="main-info-row">
+                <div class="quota-box">
+                    <h4>DAYA TAMPUNG</h4>
+                    <div class="quota-number">270</div>
+                    <div class="quota-text">ORANG MURID</div>
+                </div>
+                <img src="https://i.ibb.co/680327X/students.png" alt="Ilustrasi Siswa" class="students-illustration">
+                <img src="https://i.ibb.co/8b7v3Nn/pura-gate.png" alt="Gerbang Pura" class="pura-gate">
+            </div>
+
+            <div class="table-section">
+                <div class="table-header">
+                    <span class="star">★</span> RINCIAN HASIL SELEKSI PER 5 JALUR PENDAFTARAN <span class="star">★</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Jalur Pendaftaran</th>
+                            <th>
+                                <div class="gender-icons">
+                                    <span style="color: var(--primary-blue);">👤</span> L
+                                </div>
+                            </th>
+                            <th>
+                                <div class="gender-icons">
+                                    <span style="color: #d63384;">👤</span> P
+                                </div>
+                            </th>
+                            <th>
+                                <div class="gender-icons">
+                                    <span style="color: purple;">👥</span> Jumlah
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><div class="no-circle">1</div></td>
+                            <td><span>❤️</span> Jalur Afirmasi</td>
+                            <td>9</td>
+                            <td class="data-number-p">8</td>
+                            <td>17</td>
+                        </tr>
+                        <tr>
+                            <td><div class="no-circle">2</div></td>
+                            <td><span>🏠</span> Jalur Domisili</td>
+                            <td>89</td>
+                            <td class="data-number-p">107</td>
+                            <td>196</td>
+                        </tr>
+                        <tr>
+                            <td><div class="no-circle">3</div></td>
+                            <td><span>🎖️</span> Jalur Prestasi Nilai Raport</td>
+                            <td>1</td>
+                            <td class="data-number-p">0</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td><div class="no-circle">4</div></td>
+                            <td><span>📋</span> Pencatatan Pemenuhan Kuota</td>
+                            <td>1</td>
+                            <td class="data-number-p">1</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td><div class="no-circle">5</div></td>
+                            <td><span>🏆</span> Jalur Prestasi Akademik/Non Akademik</td>
+                            <td>3</td>
+                            <td class="data-number-p">0</td>
+                            <td>3</td>
+                        </tr>
+                    </tbody>
+                   <tfoot>
+    <tr class="total-row">
+        <td colspan="2" style="text-align: right; padding-right: 20px;">JUMLAH KESELURUHAN</td>
+        <td style="padding-left: 15px; text-align: center;">103</td>
+        <td class="data-number-p" style="text-align: center;">116</td>
+        <td style="text-align: center;">219</td>
+    </tr>
+</tfoot>
+                </table>
+            </div>
+
+            <div class="lower-grid">
+                <div class="info-box-styled">
+                    <div class="info-box-header">
+                        Jumlah Keseluruhan yang Diterima
+                    </div>
+                    <div class="total-accepted-body">
+                        <div class="accepted-row">
+                            <div class="accepted-item-detail">
+                                <span class="check-list-icon">👤</span>
+                                <p class="accepted-number-label">PUTRA / LAKI-LAKI</p>
+                                <p class="accepted-number-large" style="color: var(--primary-blue);">103</p>
+                                <p class="accepted-number-label">ORANG</p>
+                            </div>
+                            <div class="accepted-item-detail">
+                                <span class="heart-icon">👤</span>
+                                <p class="accepted-number-label">PUTRI / PEREMPUAN</p>
+                                <p class="accepted-number-large" style="color: #d63384;">116</p>
+                                <p class="accepted-number-label">ORANG</p>
+                            </div>
+                        </div>
+                        <span class="total-text">TOTAL</span>
+                        <div class="total-sum">219 ORANG</div>
+                    </div>
+                </div>
+
+                <div class="info-box-styled">
+                    <div class="info-box-header success">
+                        Hasil Daftar Ulang
+                        <div style="font-size: 0.6em; text-transform: none; font-weight: normal;">(Hingga Batas Waktu Daftar Ulang)</div>
+                    </div>
+                    <div class="re-reg-stats">
+                        <div class="re-reg-block">
+                            <span class="re-reg-icon icon-success">✓</span>
+                            <span class="re-reg-status-text icon-success">SUDAH DAFTAR ULANG</span>
+                            <div class="re-reg-counts">
+                                <div class="count-detail-inline count-l">102<br><span class="count-label">Putra</span></div>
+                                <div class="count-detail-inline count-p">116<br><span class="count-label">Putri</span></div>
+                            </div>
+                        </div>
+                        <div class="re-reg-block">
+                            <span class="re-reg-icon icon-danger">✕</span>
+                            <span class="re-reg-status-text icon-danger">TIDAK DAFTAR ULANG</span>
+                            <div class="re-reg-counts">
+                                <div class="count-detail-inline count-l">1<br><span class="count-label">Putra</span></div>
+                                <div class="count-detail-inline count-p">0<br><span class="count-label">Putri</span></div>
+                            </div>
+                        </div>
+                        <p class="note-text">**1 siswa putra tidak daftar ulang dari Jalur Domisili</p>
+                    </div>
+                    <div class="total-re-reg-bar">
+                        TOTAL YANG DAFTAR ULANG: 218 ORANG
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-section">
+                <div class="important-info-box">
+                    <div class="info-box-title">
+                        📍 INFORMASI PENTING
+                    </div>
+                    <ul class="info-list">
+                        <li>Calon murid yang dinyatakan diterima agar melakukan daftar ulang sesuai jadwal yang telah ditentukan.</li>
+                        <li>Informasi lebih lanjut dapat diakses melalui website resmi sekolah atau papan pengumuman.</li>
+                        <li>Terima kasih kepada seluruh peserta dan orang tua atas kepercayaan yang diberikan kepada SMP Negeri 4 Amlapura.</li>
+                    </ul>
+                </div>
+
+                <div class="congrats-box">
+                    <img src="https://i.ibb.co/3s6D9sX/school-logo.png" alt="Washi Tape" class="tape-image" style="opacity: 0.5;">
+                    <p class="congrats-title">Selamat kepada seluruh calon murid yang diterima! <span class="heart-icon">❤️</span></p>
+                    <p class="congrats-motto">Bersama kita wujudkan generasi berkarakter, cerdas, dan berprestasi demi masa depan yang gemilang.</p>
+                    <img src="https://i.ibb.co/3Y8M4Wv/books.png" alt="Tumpukan Buku" class="books-pile">
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-item">
+                <span class="icon-map">🌐</span>
+                <a href="http://www.smpn4amlapura.sch.id" target="_blank">www.smpn4amlapura.sch.id</a>
+            </div>
+            <div class="footer-item">
+                <span class="icon-map">📍</span>
+                <span>Jalan Pasih Kelod, Desa Bugbug, Karangasem, Bali</span>
+            </div>
+            <div class="footer-item">
+                <span class="icon-map">📞</span>
+                            </div>
+        </div>
+    </div>
+<!-- ... (Tutup div pamflet-container di sini) ... -->
+    </div> 
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+    <!-- 2. BAGIAN TABEL DATA SISWA (File 2) -->
+    <!-- Kita beri margin-top agar tidak menempel dengan pamflet -->
+    <div class="data-section" style="max-width: 700px; margin: 20px auto; background: white; padding: 20px; border-radius: 15px; border: 2px solid #ccc;">
+        <h2 style="color: #0A3C7C; text-align: center;">Daftar Nama Siswa yang Sudah Daftar Ulang</h2>
+        
+        <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9em;">
+            <thead>
+                <tr style="background-color: #0A3C7C; color: white;">
+                    <th style="padding: 10px; border: 1px solid #ddd;">No</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Nama Lengkap</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">JK</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Asal Sekolah</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Status</th>
+                </tr>
+                   </thead>
+        <tbody>
+<tr><td>1</td><td>I Nyoman Juniadi Arimbawa</td><td>L</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>2</td><td>I Kadek Doni Artha Yasa</td><td>L</td><td>50102753 - SD NEGERI 4 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>3</td><td>I Wayan Agus Aditya Ananda</td><td>L</td><td>50102823 - SD NEGERI 7 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>4</td><td>I Kade Agus Adhiwarsita Arsamana Perbawa</td><td>L</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>5</td><td>I Gede Aditya Aryasatya</td><td>L</td><td>50102823 - SD NEGERI 7 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>6</td><td>Ni Putu Alena Ari Diana</td><td>P</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>7</td><td>I Made Terang</td><td>L</td><td>50102753 - SD NEGERI 4 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>8</td><td>Ni Ketut Juni Astiti</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>9</td><td>I Kadek Satya Suadyana</td><td>L</td><td>50102753 - SD NEGERI 4 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>10</td><td>I Kade Riski Putra Prananda</td><td>L</td><td>50102823 - SD NEGERI 7 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>11</td><td>Ni Made Sinta Adnyawati</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>12</td><td>I Putu Gede Mahendra</td><td>L</td><td>50102753 - SD NEGERI 4 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>13</td><td>Ni Ketut Sintya Putri Cahyani</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>14</td><td>I Ketut Tri Adnyana</td><td>L</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>15</td><td>Ni Komang Witari Astuti</td><td>P</td><td>50102753 - SD NEGERI 4 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>16</td><td>Ni Komang Indri Maheswari</td><td>P</td><td>50102753 - SD NEGERI 4 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>17</td><td>I Komang Tegar Candrama</td><td>L</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>18</td><td>Ni Luh Desy Wulandari</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>19</td><td>Ni Luh Ariani Dewi</td><td>P</td><td>50102753 - SD NEGERI 4 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>20</td><td>Ni Luh Febri Arianti</td><td>P</td><td>50102957 - SD NEGERI 2 TENGANAN</td><td>Daftar Ulang</td></tr><tr><td>21</td><td>I Wayan Yudika Dodi Praptayuda </td><td>L</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>22</td><td>Ni Nengah Mariani</td><td>P</td><td>50102957 - SD NEGERI 2 TENGANAN</td><td>Daftar Ulang</td></tr><tr><td>23</td><td>Ni Wayan Muliani</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>24</td><td>I Nengah Pradnyana</td><td>L</td><td>50102957 - SD NEGERI 2 TENGANAN</td><td>Daftar Ulang</td></tr><tr><td>25</td><td>Ketut Reyhan Dhananjaya Andira Putra</td><td>L</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>26</td><td>Ni Kadek Viora Dyandra Manda</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>27</td><td>I Komang Maesa Putra</td><td>L</td><td>50102957 - SD NEGERI 2 TENGANAN</td><td>Daftar Ulang</td></tr><tr><td>28</td><td>Ni Kadek Febri Tya Puspita</td><td>P</td><td>50102830 - SD NEGERI 6 SUBAGAN</td><td>Daftar Ulang</td></tr><tr><td>29</td><td>I Komang sujana</td><td>L</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>30</td><td>I Wayan Doni Saputra</td><td>L</td><td>50102830 - SD NEGERI 6 SUBAGAN</td><td>Daftar Ulang</td></tr><tr><td>31</td><td>I Wayan Widya Candra</td><td>L</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>32</td><td>Ni Ketut Geysha Yuliani Puspita Dewi</td><td>P</td><td>50102687 - SD NEGERI 5 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>33</td><td>Ni Komang Meriyanti</td><td>P</td><td>50102830 - SD NEGERI 6 SUBAGAN</td><td>Daftar Ulang</td></tr><tr><td>34</td><td>Ni Komang Purnami</td><td>P</td><td>50102830 - SD NEGERI 6 SUBAGAN</td><td>Daftar Ulang</td></tr><tr><td>35</td><td>Ni Kade Chandra Puspita</td><td>P</td><td>50102687 - SD NEGERI 5 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>36</td><td>I Kade Agus Widiantara</td><td>L</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>37</td><td>I Kadek Agus Dwi Juni Artawan</td><td>L</td><td>50102830 - SD NEGERI 6 SUBAGAN</td><td>Daftar Ulang</td></tr><tr><td>38</td><td>I Kadek Sudani</td><td>L</td><td>50102957 - SD NEGERI 2 TENGANAN</td><td>Daftar Ulang</td></tr><tr><td>39</td><td>Ni Wayan Mutriyani</td><td>P</td><td>50102687 - SD NEGERI 5 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>40</td><td>KADE DIAN LEONI</td><td>P</td><td>50102823 - SD NEGERI 7 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>41</td><td>Ni Nyoman Ayu Triya Kartini Putri</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>42</td><td>I Wayan Agus Candra Valguna</td><td>L</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>43</td><td>I Nengah Raditya Dwi Susila Putra</td><td>L</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>44</td><td>Ni Komang Devi Puspitasari</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>45</td><td>Ni Kade Usmira Dewi</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>46</td><td>Ni Luh Dewi Cahyani</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>47</td><td>I Putu Agus Arta Wiguna</td><td>L</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>48</td><td>Ni Ketut Merta Sari</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>49</td><td>Ni Luh Herna</td><td>P</td><td>50102823 - SD NEGERI 7 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>50</td><td>Ni Nengah Raisa Widhiari</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>51</td><td>I Komang Chandra Riski Sadyahana</td><td>L</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>52</td><td>Ni Wayan Sri Lestari</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>53</td><td>I Kade Chandra Dwi Winata</td><td>L</td><td>50102687 - SD NEGERI 5 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>54</td><td>I Kade Pradivta Dwipayana</td><td>L</td><td>50102823 - SD NEGERI 7 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>55</td><td>Ni Komang Dewi Sikiari</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>56</td><td>Ni Kadek Cintya Maharani Putri</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>57</td><td>Ni Putu Indah Lestari</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>58</td><td>Ni Kade Sri Suniari</td><td>P</td><td>50102687 - SD NEGERI 5 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>59</td><td>I Ketut Sandhi Jaya Widiastra</td><td>L</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>60</td><td>Ni Komang Cahya Pramudita</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>61</td><td>I Nyoman Widi Sastrawan</td><td>L</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>62</td><td>Putu Agus Adi Arta</td><td>L</td><td>50103351 - SD NEGERI 18 PADANGSAMBIAN</td><td>Daftar Ulang</td></tr><tr><td>63</td><td>I Ketut Wahyu Putra Arta Wibawa</td><td>L</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>64</td><td>Ni Wayan Juni Antari</td><td>P</td><td>50102687 - SD NEGERI 5 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>65</td><td>Ni Ketut Sarina Juni</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>66</td><td>I Made Bawa Murdana</td><td>L</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>67</td><td>I Putu Aryadinata Putra</td><td>L</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>68</td><td>Ni Komang Suci Antari</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>69</td><td>Ni Ketut Juni Parwani</td><td>P</td><td>50102823 - SD NEGERI 7 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>70</td><td>Ni Putu Cessya Arista Putri</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>71</td><td>Ni Nengah Vania Dea Asmariani</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>72</td><td>Ni Ketut Oktavianingsih</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>73</td><td>I Komang Satria Adi Prayana</td><td>L</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>74</td><td>Ni Komang Gayatri Dipayani</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>75</td><td>Ni Kadek Rahayu Chandra Dewi</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>76</td><td>I Komang Andre Wijaya</td><td>L</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>77</td><td>Ni Komang Novianti</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>78</td><td>Ni Komang Sinta Sri Wahyuni</td><td>P</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>79</td><td>Ni Putu Intan Natasya Sarasitha</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>80</td><td>Ketut Epan Bujan Pratama</td><td>L</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>81</td><td>Ni Luh Sri Ayuni</td><td>P</td><td>50102687 - SD NEGERI 5 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>82</td><td>I Kade Ngurah Ananda Laksmana</td><td>L</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>83</td><td>Ni Ketut Diah Maharani</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>84</td><td>Ni Komang Setiya Dewi</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>85</td><td>I Made Andi Wira Premana</td><td>L</td><td>50102687 - SD NEGERI 5 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>86</td><td>I Gede Artha Setiawan</td><td>L</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>87</td><td>Ni Putu Angela Intan Swantari</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>88</td><td>I Kadek Dika Wahyu Satyawan</td><td>L</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>89</td><td>Ni Komang Yunita Adelina Reginatalia</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>90</td><td>I Komang Aryadiputra</td><td>L</td><td>50102687 - SD NEGERI 5 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>91</td><td>I Nyoman Risky Karunia Pratama</td><td>L</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>92</td><td>I Ketut Merta Ardana</td><td>L</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>93</td><td>I Kade Rama Aditya</td><td>L</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>94</td><td>I Nyoman Ari Githa Swara</td><td>L</td><td>50102823 - SD NEGERI 7 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>95</td><td>I Wayan Gilang Wrespayana Widi Astawa</td><td>L</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>96</td><td>Ni Putu Cahaya Sry Devi</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>97</td><td>I Kade Nara Mahardika</td><td>L</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>98</td><td>I Ketut Agus Artayana</td><td>L</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>99</td><td>Ni Ketut Sriwahyuni</td><td>P</td><td>50102687 - SD NEGERI 5 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>100</td><td>Ni Ketut Wulan Suantari</td><td>P</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>101</td><td>Ni Ketut Reva Sinta Agustin</td><td>P</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>102</td><td>NI KOMANG WINI YANI</td><td>P</td><td>50102687 - SD NEGERI 5 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>103</td><td>I Ketut Bagus Rai Suartana</td><td>L</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>104</td><td>I Komang Bagus Suartawan</td><td>L</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>105</td><td>Ni Nengah Duwik Oktaviani</td><td>P</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>106</td><td>I Kade Riski Arista Cahya Primadana</td><td>L</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>107</td><td>Ni Komang Sri Purnamawati</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>108</td><td>I Wayan Andita Pradnya Adnyana</td><td>L</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>109</td><td>Ni Kade Nadila Putriana</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>110</td><td>I Gede Aditya Prawira</td><td>L</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>111</td><td>I Ketut Digjaya</td><td>L</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>112</td><td>Ni Kade Sujani </td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>113</td><td>Ni Komang Dea Tri Yasa Dewi </td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>114</td><td>Ni Kade Aulia Cana Gladis Radistiyani</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>115</td><td>I MADE REFAN PUTRA SUGIARTA</td><td>L</td><td>50102687 - SD NEGERI 5 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>116</td><td>Ni Luh Mita Pratiwi</td><td>P</td><td>50102687 - SD NEGERI 5 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>117</td><td>Ni Komang Natalya Armita</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>118</td><td>Luh Putu Aninditha Utami Maheswari</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>119</td><td>Ni Kadek Wulan Januarthi</td><td>P</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>120</td><td>Ni Luh Eka Candrawati</td><td>P</td><td>50102823 - SD NEGERI 7 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>121</td><td>I Gede Hendra Wahyu Permana</td><td>L</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>122</td><td>I Komang Wisna Wiranata</td><td>L</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>123</td><td>Ni Kadek Dwi Darmayanti</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>124</td><td>Ni Luh Ayu Galuh Shanti Maharani</td><td>P</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>125</td><td>Yudha Resantha Alfaro</td><td>L</td><td>50102823 - SD NEGERI 7 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>126</td><td>Gede Angga Widyatmika</td><td>L</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>127</td><td>I Wayan Satya Abhinaya</td><td>L</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>128</td><td>Ni Kadek Desya Prita Wulan Sari</td><td>P</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>129</td><td>I Ketut Picanmerta Sunarjaya</td><td>L</td><td>50102823 - SD NEGERI 7 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>130</td><td>Ni Luh Kinara Putri Deviarini</td><td>P</td><td>50102823 - SD NEGERI 7 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>131</td><td>I Kadek Darma Putra</td><td>L</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>132</td><td>I Gede Dedi Arta Utama</td><td>L</td><td>50102823 - SD NEGERI 7 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>133</td><td>I Gede Agus Hredaya</td><td>L</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>134</td><td>Ni Putu Candra Putri Damayani</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>135</td><td>Ni Kadek Ari Darmayanti</td><td>P</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>136</td><td>Ni Nengah Asihyana Are Devi</td><td>P</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>137</td><td>I Kadek Satya Agusta Dwipayana</td><td>L</td><td>50102823 - SD NEGERI 7 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>138</td><td>I Kade Juna Satria Adinata</td><td>L</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>139</td><td>Ni Putu Sri Wiryaningsih</td><td>P</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>140</td><td>Ni Komang Tisya Pradnyaswari</td><td>P</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>141</td><td>Ni Ketut Lina Supartini</td><td>P</td><td>50102876 - SD NEGERI 1 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>142</td><td>Ni Nyoman Putri Sekar Parwati</td><td>P</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>143</td><td>I Kadek Arthayasa Dwi Permana</td><td>L</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>144</td><td>I Kadek Deva Maya Pramesta</td><td>L</td><td>50101708 - SD No. 1 Seminyak</td><td>Daftar Ulang</td></tr><tr><td>145</td><td>Ni Wayan Anggreni</td><td>P</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>146</td><td>Komang Widhi Arsana</td><td>L</td><td>50102823 - SD NEGERI 7 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>147</td><td>Ni Wayan Sriwidiastuti</td><td>P</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>148</td><td>I Ketut Wira Bawa Tanaya</td><td>L</td><td>50102876 - SD NEGERI 1 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>149</td><td>I Nyoman Sukerta Dana</td><td>L</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>150</td><td>I GEDE RIPAN MAHARDI</td><td>L</td><td>50101061 - SD NEGERI 4 BANJAR ANYAR</td><td>Daftar Ulang</td></tr><tr><td>151</td><td>I Komang Okta Pradnyana</td><td>L</td><td>50102876 - SD NEGERI 1 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>152</td><td>Ni Komang Feby Febriani</td><td>P</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>153</td><td>Ni Komang Yuni Kusuma Yanti</td><td>P</td><td>50102823 - SD NEGERI 7 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>154</td><td>Ni Kade Adisanthika Uttari</td><td>P</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>155</td><td>I Gusti Ayu Sani Sanila</td><td>P</td><td>50102876 - SD NEGERI 1 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>156</td><td>Ni Nengah Sri Muliyani</td><td>P</td><td>50102940 - SD NEGERI 1 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>157</td><td>I Ketut Reza Raditya</td><td>L</td><td>50102823 - SD NEGERI 7 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>158</td><td>I Kade Dwi Candra Winata</td><td>L</td><td>50103003 - SD NEGERI 2 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>159</td><td>I Komang Raditia Darma Putra</td><td>L</td><td>50102876 - SD NEGERI 1 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>160</td><td>Ni Kade Intan Adelia Putri</td><td>P</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>161</td><td>Ni Komang Tri Meisyarani Astika Putri</td><td>P</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>162</td><td>Ni Ketut Ayu Suci Praditha Tristianty</td><td>P</td><td>50102876 - SD NEGERI 1 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>163</td><td>I Ketut Wira Sentana Dwi Putra</td><td>L</td><td>50102876 - SD NEGERI 1 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>164</td><td>Ni Komang Ella Muryanti Putri</td><td>P</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>165</td><td>I Gusti Bagus Arjuna Ditya Pratama</td><td>L</td><td>50102876 - SD NEGERI 1 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>166</td><td>I Putu Ditya Christian Permana</td><td>L</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>167</td><td>I Komang Oktama Sukandarista</td><td>L</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>168</td><td>I Gusti Ayu Aolani Wijayanti</td><td>P</td><td>50102876 - SD NEGERI 1 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>169</td><td>I Wayan Risky</td><td>L</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>170</td><td>Ni Putu Dian Loviani</td><td>P</td><td>50102753 - SD NEGERI 4 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>171</td><td>I Made Aryana</td><td>L</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>172</td><td>I Gusti Ayu Diah Janaki Putri Pradnyani</td><td>P</td><td>50102876 - SD NEGERI 1 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>173</td><td>Ni Kade Mariani</td><td>P</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>174</td><td>Ni Kadek Ersa Putri</td><td>P</td><td>50102876 - SD NEGERI 1 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>175</td><td>I Made Yoga Setiawan</td><td>L</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>176</td><td>Ni Komang Michely Widnyani</td><td>P</td><td>50102760 - SD NEGERI 4 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>177</td><td>Ni Made Yunia Gita Pramita</td><td>P</td><td>50102753 - SD NEGERI 4 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>178</td><td>I Made Gunantara</td><td>L</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>179</td><td>Ni Ketut Sriani</td><td>P</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>180</td><td>Ni Made Ita Aprilia</td><td>P</td><td>50102753 - SD NEGERI 4 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>181</td><td>Ni Luh Eka Ariani</td><td>P</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>182</td><td>I Made Agus Aryawinata</td><td>L</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>183</td><td>Ni Wayan Sri Wahyuni</td><td>P</td><td>50102753 - SD NEGERI 4 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>184</td><td>Ni Kade Puspa Arini</td><td>P</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>185</td><td>I Made Setiawan</td><td>L</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>186</td><td>Ni Wayan Eka Widiyanti</td><td>P</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>187</td><td>Ni Putu Dewi Muliantari</td><td>P</td><td>50102753 - SD NEGERI 4 PERTIMA</td><td>Daftar Ulang</td></tr><tr><td>188</td><td>I Komang Sila Astawa</td><td>L</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>189</td><td>Ni Putu Ayu Astrid Juniantari</td><td>P</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>190</td><td>Ni Luh Suputri Rahayu</td><td>P</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>191</td><td>Ni Luh Mearlin Kurnia Putri</td><td>P</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>192</td><td>I Komang Andy Praditya</td><td>L</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>193</td><td>I Ketut Dipta Artayasa</td><td>L</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>194</td><td>Ni Kade Sri Wahyuni</td><td>P</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>195</td><td>Komang Dika Arya Artana Putra</td><td>L</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>196</td><td>I Ketut Kariyana </td><td>L</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>197</td><td>Ni Putu Mika Widyani</td><td>P</td><td>50102830 - SD NEGERI 6 SUBAGAN</td><td>Daftar Ulang</td></tr><tr><td>198</td><td>Ni Komang Sri Agustini</td><td>P</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>199</td><td>Ni Putu Selcyani</td><td>P</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>200</td><td>I Ketut Randy Crisnayana Vernando</td><td>L</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>201</td><td>I Kadek Erdi Juniarta</td><td>L</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>202</td><td>I Kadek Mahardika Widiartha</td><td>L</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>203</td><td>I Kade Sandhi Aditya</td><td>L</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>204</td><td>Ni Nengah Nia Dharma Putri</td><td>P</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>205</td><td>I Kade Tirta Febrian</td><td>L</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>206</td><td>Ni Luh Novi Seri Purnami</td><td>P</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>207</td><td>Ni Komang Venni Rosiani</td><td>P</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>208</td><td>I Ketut Angga Mahendra</td><td>L</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>209</td><td>Ni Nengah Susanti Asih</td><td>P</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>210</td><td>I Komang Suardika</td><td>L</td><td>50102823 - SD NEGERI 7 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>211</td><td>I Ketut Agus Widiantara</td><td>L</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>212</td><td>Ni Ketut Nataliantari</td><td>P</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>213</td><td>Ni Kadek Keisha Airani</td><td>P</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>214</td><td>Ni Wayan Dewi Widyastuti</td><td>P</td><td>50102711 - SD NEGERI 6 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>215</td><td>Ni Ketut Maytria Kartika Sari</td><td>P</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>216</td><td>I Kadek Adi Widyatmika</td><td>L</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>217</td><td>I Gede Yeshaya Gita Gerarda</td><td>L</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr><tr><td>218</td><td>Gusti Ngurah Widyadnyana Kumara</td><td>L</td><td>50102949 - SD NEGERI 3 BUGBUG</td><td>Daftar Ulang</td></tr>
+        </tbody>
+    </table>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
